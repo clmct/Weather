@@ -7,6 +7,4 @@ class ViewController: UIViewController {
     view.backgroundColor = .systemPink
   }
 
-
 }
-
