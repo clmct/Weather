@@ -8,22 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		63D98C3CB218BD0335438410 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75BE1FF3C2E73E6EC03A7AD /* Pods_Weather.framework */; };
+		B20FC9DD26394EE200D50DA0 /* LocationCardViewAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20FC9DC26394EE200D50DA0 /* LocationCardViewAnimator.swift */; };
 		B261AD0C2638617A0033BE0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD0B2638617A0033BE0A /* AppDelegate.swift */; };
 		B261AD0E2638617A0033BE0A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD0D2638617A0033BE0A /* SceneDelegate.swift */; };
-		B261AD102638617A0033BE0A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD0F2638617A0033BE0A /* ViewController.swift */; };
+		B261AD102638617A0033BE0A /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD0F2638617A0033BE0A /* MapViewController.swift */; };
 		B261AD152638617C0033BE0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B261AD142638617C0033BE0A /* Assets.xcassets */; };
 		B261AD182638617C0033BE0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B261AD162638617C0033BE0A /* LaunchScreen.storyboard */; };
+		B261AD52263885CE0033BE0A /* LocationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD51263885CE0033BE0A /* LocationCardView.swift */; };
+		B261AD582638882B0033BE0A /* UIColor+customColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD572638882B0033BE0A /* UIColor+customColors.swift */; };
+		B261AD5B263888380033BE0A /* UIFont+customFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD5A263888380033BE0A /* UIFont+customFonts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2BCCDFB5C58B5717B8BAB164 /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
+		B20FC9DC26394EE200D50DA0 /* LocationCardViewAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardViewAnimator.swift; sourceTree = "<group>"; };
 		B261AD082638617A0033BE0A /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B261AD0B2638617A0033BE0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B261AD0D2638617A0033BE0A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B261AD0F2638617A0033BE0A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B261AD0F2638617A0033BE0A /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B261AD142638617C0033BE0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B261AD172638617C0033BE0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B261AD192638617C0033BE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B261AD51263885CE0033BE0A /* LocationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardView.swift; sourceTree = "<group>"; };
+		B261AD572638882B0033BE0A /* UIColor+customColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+customColors.swift"; sourceTree = "<group>"; };
+		B261AD5A263888380033BE0A /* UIFont+customFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+customFonts.swift"; sourceTree = "<group>"; };
 		B75BE1FF3C2E73E6EC03A7AD /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D752C49549E50CE1A2B089AC /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,12 +88,32 @@
 			children = (
 				B261AD0B2638617A0033BE0A /* AppDelegate.swift */,
 				B261AD0D2638617A0033BE0A /* SceneDelegate.swift */,
-				B261AD0F2638617A0033BE0A /* ViewController.swift */,
+				B261AD572638882B0033BE0A /* UIColor+customColors.swift */,
+				B261AD5A263888380033BE0A /* UIFont+customFonts.swift */,
+				B261AD35263877120033BE0A /* Modules */,
 				B261AD142638617C0033BE0A /* Assets.xcassets */,
 				B261AD162638617C0033BE0A /* LaunchScreen.storyboard */,
 				B261AD192638617C0033BE0A /* Info.plist */,
 			);
 			path = Weather;
+			sourceTree = "<group>";
+		};
+		B261AD332638770D0033BE0A /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				B261AD0F2638617A0033BE0A /* MapViewController.swift */,
+				B261AD51263885CE0033BE0A /* LocationCardView.swift */,
+				B20FC9DC26394EE200D50DA0 /* LocationCardViewAnimator.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		B261AD35263877120033BE0A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				B261AD332638770D0033BE0A /* Map */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,8 +247,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B261AD102638617A0033BE0A /* ViewController.swift in Sources */,
+				B20FC9DD26394EE200D50DA0 /* LocationCardViewAnimator.swift in Sources */,
+				B261AD102638617A0033BE0A /* MapViewController.swift in Sources */,
+				B261AD52263885CE0033BE0A /* LocationCardView.swift in Sources */,
+				B261AD5B263888380033BE0A /* UIFont+customFonts.swift in Sources */,
 				B261AD0C2638617A0033BE0A /* AppDelegate.swift in Sources */,
+				B261AD582638882B0033BE0A /* UIColor+customColors.swift in Sources */,
 				B261AD0E2638617A0033BE0A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
