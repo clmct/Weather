@@ -3,6 +3,7 @@ import SnapKit
 import MapKit
 
 final class MapViewController: UIViewController {
+  var viewModel: MapViewModelProtocol?
   private let searchController = UISearchController()
   private let mapView = MKMapView()
   private let locationCardView = LocationCardView()
@@ -60,5 +61,6 @@ final class MapViewController: UIViewController {
   
   @objc func tap(gestureReconizer: UIGestureRecognizer) {
     showLocationCardVeiw()
+
   }
 }
