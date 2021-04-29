@@ -3,14 +3,21 @@ import SnapKit
 import MapKit
 
 final class MapViewController: UIViewController {
-  var viewModel: MapViewModelProtocol?
+  var viewModel: MapViewModelProtocol? = MapViewModel()
   private let searchController = UISearchController()
   private let mapView = MKMapView()
   private let locationCardView = LocationCardView()
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    bindToViewModel()
     setupView()
+  }
+  
+  private func bindToViewModel() {
+    viewModel?.didRequestShowCard = {
+      self.showLocationCardVeiw()
+    }
   }
   
   private func setupView() {
@@ -18,11 +25,16 @@ final class MapViewController: UIViewController {
     setupNavigationItem()
     setupMapView()
     setupLocationCardView()
+//    animator.animate()
   }
   lazy var animator = Animator(view: locationCardView)
   
   private func showLocationCardVeiw() {
-    animator.animate()
+    if let city = viewModel?.city, let coordinate = viewModel?.coordinateString {
+      locationCardView.configure(city: city, coordinate: coordinate)
+      
+    }
+    
   }
   
   private func closeLocationCardVeiw() {
@@ -36,7 +48,7 @@ final class MapViewController: UIViewController {
       make.leading.equalToSuperview().offset(16)
       make.trailing.equalToSuperview().offset(-16)
       make.height.equalTo(160)
-      make.bottom.equalTo(mapView.safeAreaLayoutGuide).offset(210)
+      make.bottom.equalTo(mapView.safeAreaLayoutGuide).offset(-16)
     }
     
   }
@@ -60,7 +72,9 @@ final class MapViewController: UIViewController {
   }
   
   @objc func tap(gestureReconizer: UIGestureRecognizer) {
-    showLocationCardVeiw()
-
+//    showLocationCardVeiw()
+    let locationPoint = gestureReconizer.location(in: mapView)
+    let locationCoordinate2D = mapView.convert(locationPoint, toCoordinateFrom: mapView)
+    viewModel?.requestLocationCard(coordinate: locationCoordinate2D)
   }
 }

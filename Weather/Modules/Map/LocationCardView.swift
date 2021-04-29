@@ -15,6 +15,11 @@ final class LocationCardView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  func configure(city: String, coordinate: String) {
+    locationNameLabel.text = city
+    locationCoordinateLabel.text = coordinate
+  }
+  
   private func setupView() {
     locationNameLabel.text = "Milan"
     locationCoordinateLabel.text = "45°16'44.7 N 9°43'33.2E"

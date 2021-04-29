@@ -24,6 +24,8 @@
 		B261AD52263885CE0033BE0A /* LocationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD51263885CE0033BE0A /* LocationCardView.swift */; };
 		B261AD582638882B0033BE0A /* UIColor+customColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD572638882B0033BE0A /* UIColor+customColors.swift */; };
 		B261AD5B263888380033BE0A /* UIFont+customFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD5A263888380033BE0A /* UIFont+customFonts.swift */; };
+		B2EE88BD263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift */; };
+		B2EE88C0263AFEE800DE694E /* CLLocation+dmsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE88BF263AFEE800DE694E /* CLLocation+dmsString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		B261AD51263885CE0033BE0A /* LocationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCardView.swift; sourceTree = "<group>"; };
 		B261AD572638882B0033BE0A /* UIColor+customColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+customColors.swift"; sourceTree = "<group>"; };
 		B261AD5A263888380033BE0A /* UIFont+customFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+customFonts.swift"; sourceTree = "<group>"; };
+		B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+dms.swift"; sourceTree = "<group>"; };
+		B2EE88BF263AFEE800DE694E /* CLLocation+dmsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+dmsString.swift"; sourceTree = "<group>"; };
 		B75BE1FF3C2E73E6EC03A7AD /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D752C49549E50CE1A2B089AC /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +128,7 @@
 				B22EDBC326398C45004D18A7 /* AppCoordinator.swift */,
 				B261AD35263877120033BE0A /* Modules */,
 				B22EDBAF26398AE9004D18A7 /* Services */,
+				B2EE88BA263AFE9C00DE694E /* Extensions */,
 				B261AD142638617C0033BE0A /* Assets.xcassets */,
 				B261AD162638617C0033BE0A /* LaunchScreen.storyboard */,
 				B261AD192638617C0033BE0A /* Info.plist */,
@@ -151,6 +156,15 @@
 				B22EDBC726398C86004D18A7 /* Weather */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		B2EE88BA263AFE9C00DE694E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift */,
+				B2EE88BF263AFEE800DE694E /* CLLocation+dmsString.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,6 +301,7 @@
 				B22EDBC426398C45004D18A7 /* AppCoordinator.swift in Sources */,
 				B22EDBCC26398CB7004D18A7 /* WeatherViewModel.swift in Sources */,
 				B22EDBC926398CA3004D18A7 /* WeatherViewController.swift in Sources */,
+				B2EE88C0263AFEE800DE694E /* CLLocation+dmsString.swift in Sources */,
 				B22EDBCF2639918F004D18A7 /* GeocodingService.swift in Sources */,
 				B22EDBB626398B7D004D18A7 /* MapCoordinator.swift in Sources */,
 				B20FC9DD26394EE200D50DA0 /* LocationCardViewAnimator.swift in Sources */,
@@ -294,6 +309,7 @@
 				B261AD102638617A0033BE0A /* MapViewController.swift in Sources */,
 				B261AD52263885CE0033BE0A /* LocationCardView.swift in Sources */,
 				B261AD5B263888380033BE0A /* UIFont+customFonts.swift in Sources */,
+				B2EE88BD263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift in Sources */,
 				B261AD0C2638617A0033BE0A /* AppDelegate.swift in Sources */,
 				B261AD582638882B0033BE0A /* UIColor+customColors.swift in Sources */,
 				B261AD0E2638617A0033BE0A /* SceneDelegate.swift in Sources */,
