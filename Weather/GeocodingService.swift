@@ -6,13 +6,13 @@ protocol GeocodingServiceProtocol {
 }
 
 final class GeocodingService: GeocodingServiceProtocol {
-  private let gecocoder = CLGeocoder()
+  private let geocoder = CLGeocoder()
   
   func getLocationName(location: CLLocation, completion: @escaping (Result<String, Error>) -> Void) {
-    gecocoder.reverseGeocodeLocation(location) { [weak self] placemarks, error in
+    geocoder.reverseGeocodeLocation(location) { [weak self] placeMarks, error in
       guard let self = self else { return }
-      guard let placemark = placemarks?.first else { return }
-      let city = self.getCityName(placemark: placemark)
+      guard let placeMark = placeMarks?.first else { return }
+      let city = self.getCityName(placeMark: placeMark)
       if let city = city {
         completion(.success(city))
       } else {
@@ -22,8 +22,8 @@ final class GeocodingService: GeocodingServiceProtocol {
     }
   }
   
-  private func getCityName(placemark: CLPlacemark) -> String? {
-    let city = placemark.locality
+  private func getCityName(placeMark: CLPlacemark) -> String? {
+    let city = placeMark.locality
     return city
   }
 

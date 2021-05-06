@@ -9,10 +9,17 @@ protocol MapViewModelProtocol {
   var didRequestShowError: (() -> Void)? { get set }
   var didRequestStart: (() -> Void)? { get set }
   var didRequestEnd: (() -> Void)? { get set }
+  var delegate: MapViewModelDelegate? { get set }
   func requestLocationCard(coordinate: CLLocationCoordinate2D)
+  func showWeather()
   }
 
+protocol MapViewModelDelegate: class {
+  func showWeather()
+}
+
 final class MapViewModel: MapViewModelProtocol {
+  weak var delegate: MapViewModelDelegate?
   var city: String?
   var coordinate: CLLocationCoordinate2D?
   var coordinateString: String?
@@ -22,13 +29,24 @@ final class MapViewModel: MapViewModelProtocol {
   var didRequestStart: (() -> Void)?
   var didRequestEnd: (() -> Void)?
   let geocodingService = GeocodingService()
-  var gecocoder = CLGeocoder()
+  var geocoder = CLGeocoder()
 
+  func showWeather() {
+    delegate?.showWeather()
+  }
   // Request Show Card
   func getCityName(location: CLLocation) {
     geocodingService.getLocationName(location: location) { [weak self] result in
       switch result {
       case .success(let city):
+        
+        //
+        
+        NetworkService().getWeather(city: city) { result in
+          print(result)
+        }
+        
+        //
         DispatchQueue.main.async {
           self?.didRequestShowCard?()
           self?.city = city

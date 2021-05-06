@@ -16,28 +16,27 @@ final class MapViewController: UIViewController {
   
   private func bindToViewModel() {
     viewModel?.didRequestShowCard = {
-      self.showLocationCardVeiw()
+      self.showLocationCardView()
     }
   }
   
   private func setupView() {
     title = "Global Weather"
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: "Map", style: .plain, target: self, action: nil)
     setupNavigationItem()
     setupMapView()
     setupLocationCardView()
-//    animator.animate()
   }
   lazy var animator = Animator(view: locationCardView)
   
-  private func showLocationCardVeiw() {
+  private func showLocationCardView() {
     if let city = viewModel?.city, let coordinate = viewModel?.coordinateString {
       locationCardView.configure(city: city, coordinate: coordinate)
-      
     }
     
   }
   
-  private func closeLocationCardVeiw() {
+  private func closeLocationCardView() {
   }
   
   private func setupLocationCardView() {
@@ -49,6 +48,11 @@ final class MapViewController: UIViewController {
       make.trailing.equalToSuperview().offset(-16)
       make.height.equalTo(160)
       make.bottom.equalTo(mapView.safeAreaLayoutGuide).offset(-16)
+    }
+    
+    locationCardView.didTapShowWeather = { [weak self] in
+      guard let self = self else { return }
+      self.viewModel?.showWeather()
     }
     
   }
@@ -67,13 +71,13 @@ final class MapViewController: UIViewController {
     
     mapView.mapType = .standard
 
-    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(gestureReconizer:)))
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(gestureRecognizer:)))
     mapView.addGestureRecognizer(gestureRecognizer)
   }
   
-  @objc func tap(gestureReconizer: UIGestureRecognizer) {
-//    showLocationCardVeiw()
-    let locationPoint = gestureReconizer.location(in: mapView)
+  @objc func tap(gestureRecognizer: UIGestureRecognizer) {
+//    showLocationCardView()
+    let locationPoint = gestureRecognizer.location(in: mapView)
     let locationCoordinate2D = mapView.convert(locationPoint, toCoordinateFrom: mapView)
     viewModel?.requestLocationCard(coordinate: locationCoordinate2D)
   }

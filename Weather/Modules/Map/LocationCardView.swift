@@ -5,6 +5,7 @@ final class LocationCardView: UIView {
   private let locationCoordinateLabel = UILabel()
   private let showWeatherButton = UIButton(type: .system)
   private let closeCardViewButton = UIButton(type: .system)
+  var didTapShowWeather: (() -> Void)?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -18,6 +19,11 @@ final class LocationCardView: UIView {
   func configure(city: String, coordinate: String) {
     locationNameLabel.text = city
     locationCoordinateLabel.text = coordinate
+  }
+  
+  @objc
+  func showWeather() {
+    didTapShowWeather?()
   }
   
   private func setupView() {
@@ -74,6 +80,8 @@ final class LocationCardView: UIView {
     showWeatherButton.layer.cornerRadius = 22
     showWeatherButton.layer.borderWidth = 1
     showWeatherButton.layer.borderColor = UIColor.basic3.cgColor
+    
+    showWeatherButton.addTarget(self, action: #selector(showWeather), for: .touchUpInside)
   }
   
   private func setupCloseCardViewButton() {
