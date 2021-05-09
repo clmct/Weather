@@ -20,6 +20,7 @@
 		B24339C2264566FA00607448 /* CityWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C1264566FA00607448 /* CityWeather.swift */; };
 		B24339C52645671600607448 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C42645671600607448 /* Main.swift */; };
 		B24339C82645672000607448 /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C72645672000607448 /* Wind.swift */; };
+		B24EFCEE2647C3860032B07E /* Token.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = B24EFCEA2647C2CB0032B07E /* Token.xcconfig */; };
 		B25647332643EFCA00165943 /* WeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25647322643EFCA00165943 /* WeatherCoordinator.swift */; };
 		B261AD0C2638617A0033BE0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD0B2638617A0033BE0A /* AppDelegate.swift */; };
 		B261AD0E2638617A0033BE0A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD0D2638617A0033BE0A /* SceneDelegate.swift */; };
@@ -53,6 +54,7 @@
 		B24339C1264566FA00607448 /* CityWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeather.swift; sourceTree = "<group>"; };
 		B24339C42645671600607448 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		B24339C72645672000607448 /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
+		B24EFCEA2647C2CB0032B07E /* Token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Token.xcconfig; sourceTree = "<group>"; };
 		B25647322643EFCA00165943 /* WeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoordinator.swift; sourceTree = "<group>"; };
 		B261AD082638617A0033BE0A /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B261AD0B2638617A0033BE0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,7 +73,6 @@
 		B2EE88BF263AFEE800DE694E /* CLLocation+dmsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+dmsString.swift"; sourceTree = "<group>"; };
 		B2FBBFFA2641890F009FE9D4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B2FBC000264189B5009FE9D4 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
-		B2FBC00326418AFC009FE9D4 /* Token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Token.xcconfig; sourceTree = "<group>"; };
 		B2FBC00F26419872009FE9D4 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		B75BE1FF3C2E73E6EC03A7AD /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D752C49549E50CE1A2B089AC /* Pods-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.release.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,8 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				B2FBBFFA2641890F009FE9D4 /* NetworkService.swift */,
+				B24EFCEA2647C2CB0032B07E /* Token.xcconfig */,
 				B2FBC000264189B5009FE9D4 /* NetworkRouter.swift */,
-				B2FBC00326418AFC009FE9D4 /* Token.xcconfig */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -344,6 +345,7 @@
 			files = (
 				B261AD182638617C0033BE0A /* LaunchScreen.storyboard in Resources */,
 				B261AD152638617C0033BE0A /* Assets.xcassets in Resources */,
+				B24EFCEE2647C3860032B07E /* Token.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,7 +461,7 @@
 /* Begin XCBuildConfiguration section */
 		B261AD1A2638617C0033BE0A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2FBC00326418AFC009FE9D4 /* Token.xcconfig */;
+			baseConfigurationReference = B24EFCEA2647C2CB0032B07E /* Token.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -521,7 +523,7 @@
 		};
 		B261AD1B2638617C0033BE0A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B2FBC00326418AFC009FE9D4 /* Token.xcconfig */;
+			baseConfigurationReference = B24EFCEA2647C2CB0032B07E /* Token.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
