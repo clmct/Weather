@@ -1,8 +1,5 @@
 import UIKit
 
-protocol ServiceAssemblyProtocol {
-}
-
 final class MapCoordinator: CoordinatorProtocol {
   var navigationController: UINavigationController
   private var childCoordinators: [CoordinatorProtocol] = []
@@ -24,8 +21,8 @@ final class MapCoordinator: CoordinatorProtocol {
 }
 
 extension MapCoordinator: MapViewModelDelegate {
-  func showWeather() {
-    let coordinator = WeatherCoordinator(navigationController: navigationController, services: services)
+  func showWeather(city: String) {
+    let coordinator = WeatherCoordinator(navigationController: navigationController, services: services, city: city)
     childCoordinators.append(coordinator)
     coordinator.start()
   }

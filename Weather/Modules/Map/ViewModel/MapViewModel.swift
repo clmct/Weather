@@ -6,6 +6,7 @@ protocol MapViewModelProtocol {
   var coordinate: CLLocationCoordinate2D? { get }
   var coordinateString: String? { get }
   var didRequestShowCard: (() -> Void)? { get set }
+  var didRequestHideCard: (() -> Void)? { get set }
   var didRequestShowError: (() -> Void)? { get set }
   var didRequestStart: (() -> Void)? { get set }
   var didRequestEnd: (() -> Void)? { get set }
@@ -15,7 +16,7 @@ protocol MapViewModelProtocol {
   }
 
 protocol MapViewModelDelegate: class {
-  func showWeather()
+  func showWeather(city: String)
 }
 
 final class MapViewModel: MapViewModelProtocol {
@@ -25,6 +26,7 @@ final class MapViewModel: MapViewModelProtocol {
   var coordinateString: String?
   var location: CLLocation?
   var didRequestShowCard: (() -> Void)?
+  var didRequestHideCard: (() -> Void)?
   var didRequestShowError: (() -> Void)?
   var didRequestStart: (() -> Void)?
   var didRequestEnd: (() -> Void)?
@@ -32,33 +34,29 @@ final class MapViewModel: MapViewModelProtocol {
   var geocoder = CLGeocoder()
 
   func showWeather() {
-    delegate?.showWeather()
+    if let city = city {
+      delegate?.showWeather(city: city)
+    }
   }
   // Request Show Card
   func getCityName(location: CLLocation) {
+    didRequestStart?()
     geocodingService.getLocationName(location: location) { [weak self] result in
       switch result {
       case .success(let city):
-        
-        //
-        
-        NetworkService().getWeather(city: city) { result in
-          print(result)
-        }
-        
-        //
         DispatchQueue.main.async {
-          self?.didRequestShowCard?()
           self?.city = city
+          self?.didRequestShowCard?()
+          self?.didRequestEnd?()
         }
       case .failure(let error):
+        DispatchQueue.main.async {
+          self?.didRequestHideCard?()
+          self?.didRequestEnd?()
+        }
         print(error)
-
       }
     }
-  }
-  
-  func getCoordinates() {
   }
   
   func requestLocationCard(coordinate: CLLocationCoordinate2D) {
@@ -67,5 +65,4 @@ final class MapViewModel: MapViewModelProtocol {
     self.coordinateString = location.dms
     getCityName(location: location)
   }
-  
 }

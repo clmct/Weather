@@ -7,7 +7,8 @@ final class MapViewController: UIViewController {
   private let searchController = UISearchController()
   private let mapView = MKMapView()
   private let locationCardView = LocationCardView()
-
+  private let loader = UIActivityIndicatorView(style: .medium)
+  private var isShow = true
   override func viewDidLoad() {
     super.viewDidLoad()
     bindToViewModel()
@@ -15,8 +16,24 @@ final class MapViewController: UIViewController {
   }
   
   private func bindToViewModel() {
-    viewModel?.didRequestShowCard = {
+    viewModel?.didRequestShowCard = { [weak self] in
+      guard let self = self else { return }
       self.showLocationCardView()
+    }
+    
+    viewModel?.didRequestHideCard = { [weak self] in
+      guard let self = self else { return }
+      self.hideLocationCardView()
+    }
+    
+    viewModel?.didRequestStart = { [weak self] in
+      guard let self = self else { return }
+      self.loader.startAnimating()
+    }
+    
+    viewModel?.didRequestEnd = { [weak self] in
+      guard let self = self else { return }
+      self.loader.stopAnimating()
     }
   }
   
@@ -26,17 +43,53 @@ final class MapViewController: UIViewController {
     setupNavigationItem()
     setupMapView()
     setupLocationCardView()
+    setupLoader()
   }
-  lazy var animator = Animator(view: locationCardView)
+  
+  private func hideLocationCardView() {
+    isShow = false
+    UIView.animate(withDuration: 0.3) {
+      self.locationCardView.snp.remakeConstraints { make in
+        make.centerX.equalToSuperview()
+        make.leading.equalToSuperview().offset(16)
+        make.trailing.equalToSuperview().offset(-16)
+        make.height.equalTo(160)
+        make.bottom.equalTo(self.mapView.safeAreaLayoutGuide).offset(200)
+      }
+      self.view.layoutIfNeeded()
+    }
+  }
   
   private func showLocationCardView() {
     if let city = viewModel?.city, let coordinate = viewModel?.coordinateString {
       locationCardView.configure(city: city, coordinate: coordinate)
+      if isShow == false {
+        UIView.animate(withDuration: 0.3) {
+          self.locationCardView.snp.remakeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.height.equalTo(160)
+            make.bottom.equalTo(self.mapView.safeAreaLayoutGuide).offset(-16)
+          }
+          self.view.layoutIfNeeded()
+        }
+        isShow = true
+      }
     }
-    
   }
   
+  
   private func closeLocationCardView() {
+    hideLocationCardView()
+  }
+  
+  private func setupLoader() {
+    view.addSubview(loader)
+    view.bringSubviewToFront(loader)
+    loader.snp.makeConstraints { make in
+      make.centerX.centerY.equalToSuperview()
+    }
   }
   
   private func setupLocationCardView() {
@@ -47,12 +100,17 @@ final class MapViewController: UIViewController {
       make.leading.equalToSuperview().offset(16)
       make.trailing.equalToSuperview().offset(-16)
       make.height.equalTo(160)
-      make.bottom.equalTo(mapView.safeAreaLayoutGuide).offset(-16)
+      make.bottom.equalTo(mapView.safeAreaLayoutGuide).offset(200)
     }
     
     locationCardView.didTapShowWeather = { [weak self] in
       guard let self = self else { return }
       self.viewModel?.showWeather()
+    }
+    
+    locationCardView.didTapCloseView = { [weak self] in
+      guard let self = self else { return }
+      self.hideLocationCardView()
     }
     
   }
@@ -61,7 +119,7 @@ final class MapViewController: UIViewController {
     navigationItem.searchController = searchController
     navigationItem.hidesSearchBarWhenScrolling = false
   }
-    
+  
   private func setupMapView() {
     view.addSubview(mapView)
     
@@ -70,13 +128,12 @@ final class MapViewController: UIViewController {
     }
     
     mapView.mapType = .standard
-
+    
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(gestureRecognizer:)))
     mapView.addGestureRecognizer(gestureRecognizer)
   }
   
   @objc func tap(gestureRecognizer: UIGestureRecognizer) {
-//    showLocationCardView()
     let locationPoint = gestureRecognizer.location(in: mapView)
     let locationCoordinate2D = mapView.convert(locationPoint, toCoordinateFrom: mapView)
     viewModel?.requestLocationCard(coordinate: locationCoordinate2D)

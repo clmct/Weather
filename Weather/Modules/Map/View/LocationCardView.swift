@@ -6,6 +6,7 @@ final class LocationCardView: UIView {
   private let showWeatherButton = UIButton(type: .system)
   private let closeCardViewButton = UIButton(type: .system)
   var didTapShowWeather: (() -> Void)?
+  var didTapCloseView: (() -> Void)?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -24,6 +25,11 @@ final class LocationCardView: UIView {
   @objc
   func showWeather() {
     didTapShowWeather?()
+  }
+  
+  @objc
+  func closeView() {
+    didTapCloseView?()
   }
   
   private func setupView() {
@@ -92,6 +98,8 @@ final class LocationCardView: UIView {
     }
     
     closeCardViewButton.setImage(UIImage(named: "close"), for: .normal)
+    
+    closeCardViewButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
   }
   
 }

@@ -1,7 +1,4 @@
 import UIKit
-class ServiceAssembly: ServiceAssemblyProtocol {
-  
-}
 
 final class AppCoordinator: CoordinatorProtocol {
   var navigationController: UINavigationController

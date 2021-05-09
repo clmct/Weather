@@ -3,8 +3,9 @@ import Kingfisher
 
 extension WeatherIconComponent {
   func configure(image: String, title: String) {
-    if let url = URL(string: "http://openweathermap.org/img/wn/10d@2x.png") {
-    imageView.kf.setImage(with: url)
+    if let url = URL(string: "http://openweathermap.org/img/wn/\(image)@2x.png") {
+      imageView.kf.setImage(with: url)
+      titleLabel.text = title
     } else {
       print("FAILURE")
     }

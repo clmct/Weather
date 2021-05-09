@@ -9,15 +9,50 @@ final class WeatherViewController: UIViewController {
   private let iconView = WeatherIconComponent()
   private let degreesCelsiusLabel = UILabel()
   private let degreesCelsiusSymbolLabel = UILabel()
+  private let loader = UIActivityIndicatorView(style: .medium)
   
   private let imageView = UIImageView()
   private let mask = UIImage()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "Milan"
     setupLayout()
-    iconView.configure(image: "", title: "Broken Clouds")
+    bindToViewModel()
+    viewModel?.getWeather()
+  }
+  
+  // MARK: BindToViewModel
+  private func bindToViewModel() {
+    viewModel?.updateView = { [weak self] in
+      guard let self = self else { return }
+      guard let pressure = self.viewModel?.pressure else { return }
+      guard let windDeg = self.viewModel?.windDeg else { return }
+      guard let windSpeed = self.viewModel?.windSpeed else { return }
+      guard let humidity = self.viewModel?.humidity else { return }
+      guard let temp = self.viewModel?.temp else { return }
+      guard let name = self.viewModel?.cityName else { return }
+      guard let description = self.viewModel?.description else { return }
+      guard let icon = self.viewModel?.icon else { return }
+      print(name, pressure, windDeg, windSpeed, humidity, temp, icon)
+      self.title = name
+      self.degreesCelsiusLabel.text = "\(temp)" // 23
+      self.degreesCelsiusSymbolLabel.text = "\u{2103}"
+      self.pressureView.configure(title: "PRESSURE", description: "\(pressure) mm Hg") //763.53 mm Hg
+      self.windView.configure(title: "WIND", description: "\(windDeg) \(windSpeed) m/s") //N 3 m/s
+      self.humidityView.configure(title: "HUMIDITY", description: "\(humidity)%")//58%
+      self.imageView.image = UIImage(named: description)
+      self.iconView.configure(image: icon, title: description)
+    }
+    
+    viewModel?.didRequestStart = { [weak self] in
+      guard let self = self else { return }
+      self.loader.startAnimating()
+    }
+    
+    viewModel?.didRequestEnd = { [weak self] in
+      guard let self = self else { return }
+      self.loader.stopAnimating()
+    }
   }
   
   private func setupLayout() {
@@ -29,6 +64,15 @@ final class WeatherViewController: UIViewController {
     setupIconView()
     setupDegreesCelsiusLabel()
     setupDegreesCelsiusSymbolLabel()
+    setupLoader()
+  }
+  
+  private func setupLoader() {
+    view.addSubview(loader)
+    view.bringSubviewToFront(loader)
+    loader.snp.makeConstraints { make in
+      make.centerX.centerY.equalToSuperview()
+    }
   }
   
   private func setupDegreesCelsiusLabel() {
@@ -42,7 +86,7 @@ final class WeatherViewController: UIViewController {
     
     degreesCelsiusLabel.textColor = UIColor(red: 0.207, green: 0.207, blue: 0.207, alpha: 1)
     degreesCelsiusLabel.font = .boldSystemFont(ofSize: 120)
-    degreesCelsiusLabel.text = "23"
+//    degreesCelsiusLabel.text = "23"
   }
   
   private func setupDegreesCelsiusSymbolLabel() {
@@ -54,7 +98,7 @@ final class WeatherViewController: UIViewController {
     }
     degreesCelsiusSymbolLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
     degreesCelsiusSymbolLabel.font = .systemFont(ofSize: 40)
-    degreesCelsiusSymbolLabel.text = "\u{2103}"
+//    degreesCelsiusSymbolLabel.text = "\u{2103}"
    
   }
   
@@ -77,7 +121,7 @@ final class WeatherViewController: UIViewController {
       make.height.equalTo(50)
     }
     
-    pressureView.configure(title: "PRESSURE", description: "763.53 mm Hg")
+//    pressureView.configure(title: "PRESSURE", description: "763.53 mm Hg")
   }
   
   private func setupWindView() {
@@ -89,7 +133,7 @@ final class WeatherViewController: UIViewController {
       make.height.equalTo(50)
     }
     
-    windView.configure(title: "WIND", description: "N 3 m/s")
+//    windView.configure(title: "WIND", description: "N 3 m/s")
   }
   
   private func setupHumidityView() {
@@ -101,7 +145,7 @@ final class WeatherViewController: UIViewController {
       make.height.equalTo(50)
     }
     
-    humidityView.configure(title: "HUMIDITY", description: "58%")
+//    humidityView.configure(title: "HUMIDITY", description: "58%")
   }
   
   private func setupImageView() {
@@ -113,8 +157,8 @@ final class WeatherViewController: UIViewController {
     }
 
     imageView.contentMode = .bottomRight
-    imageView.backgroundColor = .red
-    imageView.image = UIImage(named: "Rain")
+//    imageView.backgroundColor = .red
+//    imageView.image = UIImage(named: "Rain")
     let mask = CALayer()
     mask.contents = UIImage(named: "Mask")?.cgImage
     mask.frame = CGRect(x: 0, y: 0, width: 240, height: 576)

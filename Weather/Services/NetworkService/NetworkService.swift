@@ -74,7 +74,7 @@ extension NetworkService: NetworkServiceProtocol {
       return
     }
     print(key)
-    self.fetch(router: .getWeather(city: "London", key: key)) { (result: Result<CityWeather, NetworkError>) in
+    self.fetch(router: .getWeather(city: city, key: key)) { (result: Result<CityWeather, NetworkError>) in
       completion(result)
     }
   }
