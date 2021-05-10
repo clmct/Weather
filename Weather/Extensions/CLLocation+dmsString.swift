@@ -1,7 +1,7 @@
 import MapKit
 
 extension CLLocation {
-  var dms: String { latitude + " " + longitude }
+  var coordinateString: String { latitude + " " + longitude }
   
   var latitude: String {
     let degrees = coordinate.latitude.degrees

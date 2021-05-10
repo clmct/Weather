@@ -44,7 +44,7 @@ final class MapViewModel: MapViewModelProtocol {
       case .success(let coordinate):
         DispatchQueue.main.async {
           let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-          self?.coordinateString = location.dms
+          self?.coordinateString = location.coordinateString
           self?.coordinate = coordinate
           self?.city = text
           self?.didRequestShowCard?()
@@ -90,7 +90,7 @@ final class MapViewModel: MapViewModelProtocol {
   func requestLocationCard(coordinate: CLLocationCoordinate2D) {
     self.coordinate = coordinate
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    self.coordinateString = location.dms
+    self.coordinateString = location.coordinateString
     getCityName(location: location)
   }
 }
