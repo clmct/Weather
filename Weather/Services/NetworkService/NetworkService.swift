@@ -38,7 +38,7 @@ final class NetworkService {
       }
       guard let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode else {
         completion(.failure(.serverResponse))
-        Logger.serverError(messageLog: "response error, status is not succes")
+        Logger.serverError(messageLog: "response error, status is not success")
         return
       }
       guard let data = data else {
