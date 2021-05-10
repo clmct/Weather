@@ -4,7 +4,7 @@ protocol NetworkErrorShowingProtocol {}
 extension NetworkErrorShowingProtocol where Self: UINavigationController {
   func showNetworkError(networkError: NetworkError, completion: @escaping () -> Void) {
     
-    let networkErrorVC = NetworkErrorViewController(networkError: .noInternet)
+    let networkErrorVC = NetworkErrorViewController(networkError: networkError)
     networkErrorVC.didRefresh = { [weak self] in
       self?.dismiss(animated: true, completion: nil)
       completion()

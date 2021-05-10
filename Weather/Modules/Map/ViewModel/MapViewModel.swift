@@ -45,6 +45,7 @@ final class MapViewModel: MapViewModelProtocol {
         DispatchQueue.main.async {
           let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
           self?.coordinateString = location.dms
+          self?.ccordinate = coordinate
           self?.city = text
           self?.didRequestShowCard?()
           self?.didRequestEnd?()
@@ -57,12 +58,6 @@ final class MapViewModel: MapViewModelProtocol {
           self?.didRequestEnd?()
         }
       }
-    }
-  }
-  
-  func showWeather() {
-    if let city = city {
-      delegate?.showWeather(city: city)
     }
   }
   
@@ -83,6 +78,12 @@ final class MapViewModel: MapViewModelProtocol {
           self?.didRequestEnd?()
         }
       }
+    }
+  }
+  
+  func showWeather() {
+    if let city = city {
+      delegate?.showWeather(city: city)
     }
   }
   

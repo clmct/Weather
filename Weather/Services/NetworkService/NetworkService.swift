@@ -20,6 +20,7 @@ final class NetworkService {
 
     guard let url = components.url else {
       completion(.failure(.serverResponse))
+      Logger.serverError(messageLog: "url error")
       return
     }
     var urlRequest = URLRequest(url: url)
@@ -32,31 +33,31 @@ final class NetworkService {
     URLSession(configuration: config).dataTask(with: urlRequest) { data, response, error in
       guard error == nil else {
         completion(.failure(.noInternet))
+        Logger.serverError(messageLog: error.debugDescription)
         return
       }
-      
       guard let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode else {
         completion(.failure(.serverResponse))
+        Logger.serverError(messageLog: "response error, status is not succes")
         return
       }
-
       guard let data = data else {
         completion(.failure(.serverResponse))
+        Logger.serverError(messageLog: response.debugDescription)
         return
       }
-
       if response.statusCode == 200 {
         do {
           let jsonObject = try JSONDecoder().decode(T.self, from: data)
           completion(.success(jsonObject))
         } catch {
           completion(.failure(.serverResponse))
-          
+          Logger.serverError(messageLog: response.debugDescription)
         }
       } else {
         completion(.failure(.serverResponse))
+        Logger.serverError(messageLog: response.debugDescription)
       }
-
     }.resume()
   }
 }
@@ -66,7 +67,7 @@ extension NetworkService: NetworkServiceProtocol {
   func getWeather(city: String, completion: @escaping (Result<CityWeather, NetworkError>) -> Void) {
     
     guard let key = Bundle.main.object(forInfoDictionaryKey: "Token") as? String else {
-      completion(.failure(.noInternet))
+      completion(.failure(.serverResponse))
       return
     }
     
