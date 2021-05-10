@@ -10,6 +10,7 @@ final class MapViewController: UIViewController {
   private let locationCardView = LocationCardView()
   private let loader = UIActivityIndicatorView(style: .medium)
   private var isShowKeyboard = false
+  private var keyboardHeight: CGFloat = 0
   
   // MARK: Life cycle
   override func viewDidLoad() {
@@ -67,7 +68,7 @@ final class MapViewController: UIViewController {
   
   private func showLocationCardView() {
     if isShowKeyboard {
-      showLocationCardViewOnCenter()
+      showLocationCardViewOverKeyboard()
       return
     }
     
@@ -86,12 +87,12 @@ final class MapViewController: UIViewController {
     }
   }
   
-  private func showLocationCardViewOnCenter() {
+  private func showLocationCardViewOverKeyboard() {
     if let city = viewModel?.city, let coordinate = viewModel?.coordinateString {
       locationCardView.configure(city: city, coordinate: coordinate)
         UIView.animate(withDuration: 0.3) {
           self.locationCardView.snp.remakeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-(self.keyboardHeight + 16))
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(160)
@@ -110,8 +111,11 @@ final class MapViewController: UIViewController {
   
   @objc
   private func keyboardWillShow(notification: NSNotification) {
+    if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+      keyboardHeight = keyboardRect.size.height
+    }
     isShowKeyboard = true
-    showLocationCardViewOnCenter()
+    showLocationCardView()
   }
   
   @objc
