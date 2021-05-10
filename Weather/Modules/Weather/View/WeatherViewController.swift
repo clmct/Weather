@@ -43,8 +43,8 @@ final class WeatherViewController: UIViewController {
       self.pressureView.configure(title: "PRESSURE", description: "\(pressure) mm Hg") //763.53 mm Hg
       self.windView.configure(title: "WIND", description: "\(windDeg) \(windSpeed) m/s") //N 3 m/s
       self.humidityView.configure(title: "HUMIDITY", description: "\(humidity)%") //58%
-      self.imageView.image = UIImage(named: description)
       self.iconView.configure(image: icon, title: description)
+      self.imageView.image = UIImage(named: description) ?? UIImage(named: "broken clouds")
     }
     
     viewModel?.didRequestStart = { [weak self] in
