@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		63D98C3CB218BD0335438410 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75BE1FF3C2E73E6EC03A7AD /* Pods_Weather.framework */; };
 		B222971E264944B70061639E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B222971D264944B70061639E /* Logger.swift */; };
+		B223F6882649C57600073526 /* WeatherViewModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B223F6872649C57600073526 /* WeatherViewModelData.swift */; };
 		B22EDBB226398B10004D18A7 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EDBB126398B10004D18A7 /* MapViewModel.swift */; };
 		B22EDBB626398B7D004D18A7 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EDBB526398B7D004D18A7 /* MapCoordinator.swift */; };
 		B22EDBBF26398BD2004D18A7 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EDBBE26398BD2004D18A7 /* CoordinatorProtocol.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		2BCCDFB5C58B5717B8BAB164 /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 		B222971D264944B70061639E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		B223F6872649C57600073526 /* WeatherViewModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModelData.swift; sourceTree = "<group>"; };
 		B22EDBB126398B10004D18A7 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		B22EDBB526398B7D004D18A7 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		B22EDBBE26398BD2004D18A7 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				B24339C42645671600607448 /* Main.swift */,
 				B24339C72645672000607448 /* Wind.swift */,
 				B282F32526482A2100FA81E5 /* Constants.swift */,
+				B223F6872649C57600073526 /* WeatherViewModelData.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				B282F323264829C600FA81E5 /* NetworkErrorViewController.swift in Sources */,
 				B2EE88C0263AFEE800DE694E /* CLLocation+dmsString.swift in Sources */,
 				B22EDBCF2639918F004D18A7 /* GeocodingService.swift in Sources */,
+				B223F6882649C57600073526 /* WeatherViewModelData.swift in Sources */,
 				B2FBBFFB2641890F009FE9D4 /* NetworkService.swift in Sources */,
 				B22EDBB626398B7D004D18A7 /* MapCoordinator.swift in Sources */,
 				B24339C2264566FA00607448 /* CityWeather.swift in Sources */,
