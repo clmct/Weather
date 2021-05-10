@@ -106,7 +106,7 @@ final class MapViewController: UIViewController {
   private func tap(gestureRecognizer: UIGestureRecognizer) {
     let locationPoint = gestureRecognizer.location(in: mapView)
     let locationCoordinate2D = mapView.convert(locationPoint, toCoordinateFrom: mapView)
-    viewModel?.requestLocationCard(coordinate: locationCoordinate2D)
+    viewModel?.requestShowLocationCard(coordinate: locationCoordinate2D)
   }
   
   @objc
@@ -201,6 +201,6 @@ final class MapViewController: UIViewController {
 extension MapViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
     guard let text = searchController.searchBar.text else { return }
-    viewModel?.updateSearchResults(text: text)
+    viewModel?.requestShowLocationCard(text: text)
   }
 }

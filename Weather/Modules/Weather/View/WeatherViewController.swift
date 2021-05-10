@@ -33,7 +33,7 @@ final class WeatherViewController: UIViewController {
             let windDeg = self.viewModel?.windDeg,
             let windSpeed = self.viewModel?.windSpeed,
             let humidity = self.viewModel?.humidity,
-            let temp = self.viewModel?.temp,
+            let temp = self.viewModel?.temperature,
             let name = self.viewModel?.cityName,
             let description = self.viewModel?.description,
             let icon = self.viewModel?.icon else { return }

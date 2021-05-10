@@ -11,9 +11,10 @@ protocol MapViewModelProtocol {
   var didRequestStart: (() -> Void)? { get set }
   var didRequestEnd: (() -> Void)? { get set }
   var delegate: MapViewModelDelegate? { get set }
-  func requestLocationCard(coordinate: CLLocationCoordinate2D)
+  func requestShowLocationCard(coordinate: CLLocationCoordinate2D)
+  func requestHideLocationCard()
   func showWeather()
-  func updateSearchResults(text: String)
+  func requestShowLocationCard(text: String)
   }
 
 protocol MapViewModelDelegate: class {
@@ -30,35 +31,10 @@ final class MapViewModel: MapViewModelProtocol {
   var didRequestStart: (() -> Void)?
   var didRequestEnd: (() -> Void)?
   weak var delegate: MapViewModelDelegate?
-  
   private let geocodingService: GeocodingServiceProtocol
 
   init(geocodingService: GeocodingServiceProtocol) {
     self.geocodingService = geocodingService
-  }
-  
-  func updateSearchResults(text: String) {
-    didRequestStart?()
-    geocodingService.getLocationCoordinate(city: text) { [weak self] result in
-      switch result {
-      case .success(let coordinate):
-        DispatchQueue.main.async {
-          let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-          self?.coordinateString = location.coordinateString
-          self?.coordinate = coordinate
-          self?.city = text
-          self?.didRequestShowCard?()
-          self?.didRequestEnd?()
-        }
-      case .failure(_):
-        DispatchQueue.main.async {
-          self?.city = nil
-          self?.coordinateString = nil
-          self?.didRequestHideCard?()
-          self?.didRequestEnd?()
-        }
-      }
-    }
   }
   
   func showWeather() {
@@ -67,29 +43,48 @@ final class MapViewModel: MapViewModelProtocol {
     }
   }
   
-  func requestLocationCard(coordinate: CLLocationCoordinate2D) {
-    self.coordinate = coordinate
-    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    self.coordinateString = location.coordinateString
-    getCityName(location: location)
+  func requestHideLocationCard() {
+    coordinateString = nil
+    city = nil
+    coordinate = nil
+    didRequestHideCard?()
   }
   
-  private func getCityName(location: CLLocation) {
+  private func requestShowLocationCard(city: String, coordinate: CLLocationCoordinate2D) {
+    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    coordinateString = location.coordinateString
+    self.city = city
+    self.coordinate = coordinate
+    didRequestShowCard?()
+  }
+  
+  func requestShowLocationCard(text: String) {
     didRequestStart?()
+    geocodingService.getLocationCoordinate(city: text) { [weak self] result in
+      DispatchQueue.main.async {
+        switch result {
+        case .success(let coordinate):
+          self?.requestShowLocationCard(city: text, coordinate: coordinate)
+        case .failure( _):
+          self?.requestHideLocationCard()
+        }
+        self?.didRequestEnd?()
+      }
+    }
+  }
+  
+  func requestShowLocationCard(coordinate: CLLocationCoordinate2D) {
+    didRequestStart?()
+    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     geocodingService.getLocationName(location: location) { [weak self] result in
-      switch result {
-      case .success(let city):
-        DispatchQueue.main.async {
-          self?.city = city
-          self?.didRequestShowCard?()
-          self?.didRequestEnd?()
+      DispatchQueue.main.async {
+        switch result {
+        case .success(let city):
+          self?.requestShowLocationCard(city: city, coordinate: coordinate)
+        case .failure(let error):
+          self?.requestHideLocationCard()
         }
-      case .failure(_):
-        DispatchQueue.main.async {
-          self?.city = nil
-          self?.didRequestHideCard?()
-          self?.didRequestEnd?()
-        }
+        self?.didRequestEnd?()
       }
     }
   }

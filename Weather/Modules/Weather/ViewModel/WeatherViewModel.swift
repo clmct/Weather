@@ -3,7 +3,7 @@ import UIKit
 protocol WeatherViewModelProtocol {
   var pressure: Int? { get set }
   var humidity: Int? { get set }
-  var temp: Int? { get set }
+  var temperature: Int? { get set }
   var image: UIImage? { get set }
   var windSpeed: Double? { get set }
   var windDeg: String? { get set }
@@ -25,7 +25,7 @@ protocol WeatherViewModelDelegate: class {
 final class WeatherViewModel: WeatherViewModelProtocol {
   var pressure: Int?
   var humidity: Int?
-  var temp: Int?
+  var temperature: Int?
   var image: UIImage?
   var windSpeed: Double?
   var windDeg: String?
@@ -56,7 +56,7 @@ final class WeatherViewModel: WeatherViewModelProtocol {
         self.pressure = weather.main.pressure
         self.windSpeed = weather.wind.speed
         self.humidity = weather.main.humidity
-        self.temp = Int(weather.main.temp - 273.15)
+        self.temperature = Int(weather.main.temp - 273.15)
         self.windDeg = self.getCommonDegrees(deg: weather.wind.deg)
         self.cityName = weather.name
         self.description = weather.weather.first?.description
