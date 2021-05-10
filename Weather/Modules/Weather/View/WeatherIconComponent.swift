@@ -1,5 +1,6 @@
 import UIKit
 import Kingfisher
+import NotificationBannerSwift
 
 final class WeatherIconComponent: UIView {
   private let imageView = UIImageView()
@@ -19,6 +20,9 @@ final class WeatherIconComponent: UIView {
   func configure(image: String, title: String) {
     if let url = URL(string: "http://openweathermap.org/img/wn/\(image)@2x.png") {
       imageView.kf.setImage(with: url)
+    } else {
+      let banner = NotificationBanner(title: "Icon", subtitle: "Icon hadn't loaded", style: .warning)
+      banner.show()
     }
     titleLabel.text = title
   }

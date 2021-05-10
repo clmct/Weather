@@ -37,13 +37,12 @@ final class WeatherViewController: UIViewController {
             let name = self.viewModel?.cityName,
             let description = self.viewModel?.description,
             let icon = self.viewModel?.icon else { return }
-      
       self.title = name
-      self.degreesCelsiusLabel.text = "\(temp)" // 23
+      self.degreesCelsiusLabel.text = "\(temp)"
       self.degreesCelsiusSymbolLabel.text = "\u{2103}"
-      self.pressureView.configure(title: "PRESSURE", description: "\(pressure) mm Hg") //763.53 mm Hg
-      self.windView.configure(title: "WIND", description: "\(windDeg) \(windSpeed) m/s") //N 3 m/s
-      self.humidityView.configure(title: "HUMIDITY", description: "\(humidity)%") //58%
+      self.pressureView.configure(title: "PRESSURE", description: "\(pressure) mm Hg")
+      self.windView.configure(title: "WIND", description: "\(windDeg) \(windSpeed) m/s")
+      self.humidityView.configure(title: "HUMIDITY", description: "\(humidity)%")
       self.iconView.configure(image: icon, title: description)
       if let image = UIImage(named: description) {
         self.imageView.image = image
