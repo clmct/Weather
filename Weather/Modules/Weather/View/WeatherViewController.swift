@@ -1,4 +1,5 @@
 import UIKit
+import NotificationBannerSwift
 
 final class WeatherViewController: UIViewController {
   // MARK: Properties
@@ -44,7 +45,13 @@ final class WeatherViewController: UIViewController {
       self.windView.configure(title: "WIND", description: "\(windDeg) \(windSpeed) m/s") //N 3 m/s
       self.humidityView.configure(title: "HUMIDITY", description: "\(humidity)%") //58%
       self.iconView.configure(image: icon, title: description)
-      self.imageView.image = UIImage(named: description) ?? UIImage(named: "broken clouds")
+      if let image = UIImage(named: description) {
+        self.imageView.image = image
+      } else {
+        self.imageView.image = UIImage(named: "broken clouds")
+        let banner = NotificationBanner(title: "Image", subtitle: "Defauld image had loaded", style: .info)
+        banner.show()
+      }
     }
     
     viewModel?.didRequestStart = { [weak self] in

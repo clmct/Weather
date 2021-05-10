@@ -18,5 +18,6 @@ target 'Weather' do
   pod 'Kingfisher'
   pod 'SwiftLint'
   pod 'SnapKit'
+  pod 'NotificationBannerSwift'
 
 end
