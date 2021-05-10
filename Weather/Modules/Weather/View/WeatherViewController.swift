@@ -29,22 +29,16 @@ final class WeatherViewController: UIViewController {
   private func bindToViewModel() {
     viewModel?.updateView = { [weak self] in
       guard let self = self else { return }
-      guard let pressure = self.viewModel?.pressure,
-            let windDeg = self.viewModel?.windDeg,
-            let windSpeed = self.viewModel?.windSpeed,
-            let humidity = self.viewModel?.humidity,
-            let temp = self.viewModel?.temperature,
-            let name = self.viewModel?.cityName,
-            let description = self.viewModel?.description,
-            let icon = self.viewModel?.icon else { return }
-      self.title = name
-      self.degreesCelsiusLabel.text = "\(temp)"
+      guard let data = self.viewModel?.data else { return }
+      self.title = data.cityName
+      self.degreesCelsiusLabel.text = "\(data.temperature)"
       self.degreesCelsiusSymbolLabel.text = "\u{2103}"
-      self.pressureView.configure(title: "PRESSURE", description: "\(pressure) mm Hg")
-      self.windView.configure(title: "WIND", description: "\(windDeg) \(windSpeed) m/s")
-      self.humidityView.configure(title: "HUMIDITY", description: "\(humidity)%")
-      self.iconView.configure(image: icon, title: description)
-      if let image = UIImage(named: description) {
+      self.pressureView.configure(title: "PRESSURE", description: "\(data.pressure) mm Hg")
+      self.windView.configure(title: "WIND", description: "\(data.windDeg) \(data.windSpeed) m/s")
+      self.humidityView.configure(title: "HUMIDITY", description: "\(data.humidity)%")
+      self.iconView.configure(image: data.icon, title: data.description)
+      if let description = data.description,
+         let image = UIImage(named: description) {
         self.imageView.image = image
       } else {
         self.imageView.image = UIImage(named: "broken clouds")

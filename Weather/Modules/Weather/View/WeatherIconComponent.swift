@@ -17,13 +17,15 @@ final class WeatherIconComponent: UIView {
   }
   
   // MARK: Methods
-  func configure(image: String, title: String) {
-    if let url = NetworkRouter.getImage(code: image).getURL() {
-      imageView.kf.setImage(with: url)
-    } else {
+  func configure(image: String?, title: String?) {
+    guard let image = image,
+          let title = title,
+          let url = NetworkRouter.getImage(code: image).getURL() else {
       let banner = NotificationBanner(title: "Icon", subtitle: "Icon hadn't loaded", style: .warning)
       banner.show()
+      return
     }
+    imageView.kf.setImage(with: url)
     titleLabel.text = title
   }
   

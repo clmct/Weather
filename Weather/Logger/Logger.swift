@@ -7,4 +7,8 @@ struct Logger {
     os_log("%s", log: log, type: .error, messageLog)
   }
   
+  static func geocodingError(messageLog: String) {
+    let log = OSLog(subsystem: "WeatherApp", category: "Geocoding")
+    os_log("%s", log: log, type: .error, messageLog)
+  }
 }

@@ -1,15 +1,18 @@
 import UIKit
 
+struct WeatherViewModelData {
+  var pressure: Int
+  var humidity: Int
+  var temperature: Int
+  var windSpeed: Double
+  var windDeg: String
+  var cityName: String
+  var description: String?
+  var icon: String?
+}
+
 protocol WeatherViewModelProtocol {
-  var pressure: Int? { get set }
-  var humidity: Int? { get set }
-  var temperature: Int? { get set }
-  var image: UIImage? { get set }
-  var windSpeed: Double? { get set }
-  var windDeg: String? { get set }
-  var cityName: String? { get set }
-  var description: String? { get set }
-  var icon: String? { get set }
+  var data: WeatherViewModelData? { get }
   var updateView: (() -> Void)? { get set }
   var didRequestStart: (() -> Void)? { get set }
   var didRequestEnd: (() -> Void)? { get set }
@@ -23,15 +26,7 @@ protocol WeatherViewModelDelegate: class {
 }
 
 final class WeatherViewModel: WeatherViewModelProtocol {
-  var pressure: Int?
-  var humidity: Int?
-  var temperature: Int?
-  var image: UIImage?
-  var windSpeed: Double?
-  var windDeg: String?
-  var cityName: String?
-  var description: String?
-  var icon: String?
+  var data: WeatherViewModelData?
   var updateView: (() -> Void)?
   var didRequestStart: (() -> Void)?
   var didRequestEnd: (() -> Void)?
@@ -51,28 +46,25 @@ final class WeatherViewModel: WeatherViewModelProtocol {
   func getWeather() {
     didRequestStart?()
     networkService.getWeather(city: city) { (result: Result<CityWeather, NetworkError>) in
-      switch result {
-      case .success(let weather):
-        self.pressure = weather.main.pressure
-        self.windSpeed = weather.wind.speed
-        self.humidity = weather.main.humidity
-        self.temperature = Int(weather.main.temp - 273.15)
-        self.windDeg = self.getCommonDegrees(deg: weather.wind.deg)
-        self.cityName = weather.name
-        self.description = weather.weather.first?.description
-        self.icon = weather.weather.first?.icon
-        DispatchQueue.main.async {
+      DispatchQueue.main.async {
+        switch result {
+        case .success(let weather):
+          self.data = WeatherViewModelData(pressure: weather.main.pressure,
+                                           humidity: weather.main.humidity,
+                                           temperature: Int(weather.main.temp - 273.15),
+                                           windSpeed: weather.wind.speed,
+                                           windDeg: self.getCommonDegrees(deg: weather.wind.deg),
+                                           cityName: weather.name,
+                                           description: weather.weather.first?.description,
+                                           icon: weather.weather.first?.icon)
           self.updateView?()
-          self.didRequestEnd?()
-        }
-        
-      case .failure(let networkError):
-        DispatchQueue.main.async {
+        case .failure(let networkError):
           self.delegate?.showNetworkError(networkError: networkError) { [weak self] in
             self?.getWeather()
           }
           self.didRequestEnd?()
         }
+        self.didRequestEnd?()
       }
     }
   }

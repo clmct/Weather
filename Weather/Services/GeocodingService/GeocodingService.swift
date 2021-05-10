@@ -2,7 +2,8 @@ import Foundation
 import MapKit
 
 enum GeocodingError: Error {
-  case error
+  case errorName
+  case errorCoordinate
 }
 
 protocol GeocodingServiceProtocol {
@@ -22,10 +23,10 @@ final class GeocodingService {
 // MARK: GeocodingServiceProtocol
 extension GeocodingService: GeocodingServiceProtocol {
   func getLocationCoordinate(city: String, completion: @escaping (Result<CLLocationCoordinate2D, GeocodingError>) -> Void) {
-    geoCoder.geocodeAddressString(city) { placeMarks, error in
+    geoCoder.geocodeAddressString(city) { placeMarks, _ in
       guard let placeMark = placeMarks?.first,
             let coordinate = placeMark.location?.coordinate else {
-        completion(.failure(.error))
+        completion(.failure(.errorCoordinate))
         return
       }
       completion(.success(coordinate))
@@ -33,11 +34,11 @@ extension GeocodingService: GeocodingServiceProtocol {
   }
   
   func getLocationName(location: CLLocation, completion: @escaping (Result<String, GeocodingError>) -> Void) {
-    geoCoder.reverseGeocodeLocation(location) { [weak self] placeMarks, error in
+    geoCoder.reverseGeocodeLocation(location) { [weak self] placeMarks, _ in
       guard let self = self else { return }
       guard let placeMark = placeMarks?.first,
             let city = self.getCityName(placeMark: placeMark) else {
-        completion(.failure(.error))
+        completion(.failure(.errorName))
         return
       }
       completion(.success(city))

@@ -20,40 +20,56 @@ final class NetworkService {
     }
     var urlRequest = URLRequest(url: url)
     urlRequest.httpMethod = router.method
-
+    
     let config = URLSessionConfiguration.default
     config.waitsForConnectivity = true
     config.timeoutIntervalForResource = 60
-
+    
     URLSession(configuration: config).dataTask(with: urlRequest) { data, response, error in
-      guard error == nil else {
-        completion(.failure(.noInternet))
-        Logger.serverError(messageLog: error.debugDescription)
-        return
-      }
-      guard let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode else {
-        completion(.failure(.serverResponse))
-        Logger.serverError(messageLog: "response error, status is not success")
-        return
-      }
-      guard let data = data else {
-        completion(.failure(.serverResponse))
-        Logger.serverError(messageLog: response.debugDescription)
-        return
-      }
-      if response.statusCode == 200 {
-        do {
-          let jsonObject = try JSONDecoder().decode(T.self, from: data)
-          completion(.success(jsonObject))
-        } catch {
-          completion(.failure(.serverResponse))
-          Logger.serverError(messageLog: response.debugDescription)
-        }
+      
+      if self.checkData(data: data), self.checkResponse(response: response), self.checkError(error: error) {
       } else {
         completion(.failure(.serverResponse))
-        Logger.serverError(messageLog: response.debugDescription)
+        return
+      }
+      
+      guard let data = data else {
+        completion(.failure(.noInternet))
+        return
+      }
+      do {
+        let jsonObject = try JSONDecoder().decode(T.self, from: data)
+        completion(.success(jsonObject))
+      } catch {
+        completion(.failure(.serverResponse))
+        Logger.serverError(messageLog: "decode isn't success")
       }
     }.resume()
+  }
+
+  private func checkResponse(response: URLResponse?) -> Bool {
+    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+      Logger.serverError(messageLog: "response error, status is not success")
+      return false
+    }
+    
+    return true
+  }
+  
+  private func checkData(data: Data?) -> Bool {
+    if data == nil {
+      Logger.serverError(messageLog: "data isn't valid")
+      return false
+    }
+    return true
+  }
+  
+  private func checkError(error: Error?) -> Bool {
+    guard error == nil else {
+      Logger.serverError(messageLog: error.debugDescription)
+      return false
+    }
+    return true
   }
 }
 

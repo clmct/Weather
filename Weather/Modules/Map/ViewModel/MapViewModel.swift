@@ -50,14 +50,6 @@ final class MapViewModel: MapViewModelProtocol {
     didRequestHideCard?()
   }
   
-  private func requestShowLocationCard(city: String, coordinate: CLLocationCoordinate2D) {
-    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    coordinateString = location.coordinateString
-    self.city = city
-    self.coordinate = coordinate
-    didRequestShowCard?()
-  }
-  
   func requestShowLocationCard(text: String) {
     didRequestStart?()
     geocodingService.getLocationCoordinate(city: text) { [weak self] result in
@@ -65,7 +57,8 @@ final class MapViewModel: MapViewModelProtocol {
         switch result {
         case .success(let coordinate):
           self?.requestShowLocationCard(city: text, coordinate: coordinate)
-        case .failure( _):
+        case .failure(let error):
+          Logger.geocodingError(messageLog: error.localizedDescription)
           self?.requestHideLocationCard()
         }
         self?.didRequestEnd?()
@@ -82,10 +75,19 @@ final class MapViewModel: MapViewModelProtocol {
         case .success(let city):
           self?.requestShowLocationCard(city: city, coordinate: coordinate)
         case .failure(let error):
+          Logger.geocodingError(messageLog: error.localizedDescription)
           self?.requestHideLocationCard()
         }
         self?.didRequestEnd?()
       }
     }
+  }
+  
+  private func requestShowLocationCard(city: String, coordinate: CLLocationCoordinate2D) {
+    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    coordinateString = location.coordinateString
+    self.city = city
+    self.coordinate = coordinate
+    didRequestShowCard?()
   }
 }
