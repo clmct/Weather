@@ -24,7 +24,7 @@ final class MapViewController: UIViewController {
     viewModel?.didRequestShowCard = { [weak self] in
       guard let self = self else { return }
       self.showLocationCardView()
-      if let coordinate = self.viewModel?.ccordinate {
+      if let coordinate = self.viewModel?.coordinate {
         self.mapView.setCenter(coordinate, animated: true)
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate

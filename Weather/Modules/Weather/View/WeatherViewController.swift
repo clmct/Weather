@@ -13,7 +13,7 @@ final class WeatherViewController: UIViewController {
   private let loader = UIActivityIndicatorView(style: .medium)
   private let imageView = UIImageView()
   
-  // MARK: Life cicle
+  // MARK: Life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()

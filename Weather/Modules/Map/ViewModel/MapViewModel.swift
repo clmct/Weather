@@ -3,7 +3,7 @@ import MapKit
 
 protocol MapViewModelProtocol {
   var city: String? { get }
-  var ccordinate: CLLocationCoordinate2D? { get }
+  var coordinate: CLLocationCoordinate2D? { get }
   var coordinateString: String? { get }
   var didRequestShowCard: (() -> Void)? { get set }
   var didRequestHideCard: (() -> Void)? { get set }
@@ -22,7 +22,7 @@ protocol MapViewModelDelegate: class {
 
 final class MapViewModel: MapViewModelProtocol {
   var city: String?
-  var ccordinate: CLLocationCoordinate2D?
+  var coordinate: CLLocationCoordinate2D?
   var coordinateString: String?
   var didRequestShowCard: (() -> Void)?
   var didRequestHideCard: (() -> Void)?
@@ -45,7 +45,7 @@ final class MapViewModel: MapViewModelProtocol {
         DispatchQueue.main.async {
           let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
           self?.coordinateString = location.dms
-          self?.ccordinate = coordinate
+          self?.coordinate = coordinate
           self?.city = text
           self?.didRequestShowCard?()
           self?.didRequestEnd?()
@@ -88,7 +88,7 @@ final class MapViewModel: MapViewModelProtocol {
   }
   
   func requestLocationCard(coordinate: CLLocationCoordinate2D) {
-    self.ccordinate = coordinate
+    self.coordinate = coordinate
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     self.coordinateString = location.dms
     getCityName(location: location)

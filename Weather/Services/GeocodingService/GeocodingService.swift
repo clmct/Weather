@@ -11,7 +11,7 @@ protocol GeocodingServiceProtocol {
 }
 
 final class GeocodingService {
-  private let geocoder = CLGeocoder()
+  private let geoCoder = CLGeocoder()
   
   private func getCityName(placeMark: CLPlacemark) -> String? {
     let city = placeMark.locality
@@ -22,7 +22,7 @@ final class GeocodingService {
 // MARK: GeocodingServiceProtocol
 extension GeocodingService: GeocodingServiceProtocol {
   func getLocationCoordinate(city: String, completion: @escaping (Result<CLLocationCoordinate2D, GeocodingError>) -> Void) {
-    geocoder.geocodeAddressString(city) { placeMarks, error in
+    geoCoder.geocodeAddressString(city) { placeMarks, error in
       guard let placeMark = placeMarks?.first,
             let coordinate = placeMark.location?.coordinate else {
         completion(.failure(.error))
@@ -33,7 +33,7 @@ extension GeocodingService: GeocodingServiceProtocol {
   }
   
   func getLocationName(location: CLLocation, completion: @escaping (Result<String, GeocodingError>) -> Void) {
-    geocoder.reverseGeocodeLocation(location) { [weak self] placeMarks, error in
+    geoCoder.reverseGeocodeLocation(location) { [weak self] placeMarks, error in
       guard let self = self else { return }
       guard let placeMark = placeMarks?.first,
             let city = self.getCityName(placeMark: placeMark) else {
