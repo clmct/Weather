@@ -4,7 +4,8 @@ DerivedData/
 xcuserdata/
 *.xccheckout
 *.xcscmblueprint
-**.xcconfig
 
 # CocoaPods
 Pods/
+
+

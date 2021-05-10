@@ -17,5 +17,6 @@ target 'Weather' do
 
   pod 'Kingfisher'
   pod 'SwiftLint'
+  pod 'SnapKit'
 
 end
