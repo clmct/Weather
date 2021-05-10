@@ -48,7 +48,7 @@ final class WeatherViewController: UIViewController {
         self.imageView.image = image
       } else {
         self.imageView.image = UIImage(named: "broken clouds")
-        let banner = NotificationBanner(title: "Image", subtitle: "Defauld image had loaded", style: .info)
+        let banner = NotificationBanner(title: "Image", subtitle: "Default image had loaded", style: .info)
         banner.show()
       }
     }
