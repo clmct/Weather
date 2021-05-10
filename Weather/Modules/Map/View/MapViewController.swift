@@ -11,12 +11,12 @@ final class MapViewController: UIViewController {
   private let loader = UIActivityIndicatorView(style: .medium)
   private var isShowKeyboard = false
   
-  // MARK: Life cicle
+  // MARK: Life cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     bindToViewModel()
     setupLayout()
-    setupKeyboardObsrerver()
+    setupKeyboardObserver()
   }
   
   // MARK: Binding
@@ -121,7 +121,7 @@ final class MapViewController: UIViewController {
   }
   
   // MARK: Keyboard
-  private func setupKeyboardObsrerver() {
+  private func setupKeyboardObserver() {
     NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow),
                                            name: UIResponder.keyboardWillShowNotification,
                                            object: nil)

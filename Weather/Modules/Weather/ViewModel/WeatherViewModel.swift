@@ -36,7 +36,6 @@ final class WeatherViewModel: WeatherViewModelProtocol {
   var didRequestStart: (() -> Void)?
   var didRequestEnd: (() -> Void)?
   weak var delegate: WeatherViewModelDelegate?
-  
   private let networkService: NetworkServiceProtocol
   private let city: String
   
@@ -78,7 +77,7 @@ final class WeatherViewModel: WeatherViewModelProtocol {
     }
   }
   
-  func getCommonDegrees(deg: Int) -> String {
+  private func getCommonDegrees(deg: Int) -> String {
     switch deg {
     case 0...90:
       return "N"

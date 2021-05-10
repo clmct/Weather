@@ -9,5 +9,4 @@ extension UIColor {
   static var basic6 = UIColor(red: 0.207, green: 0.207, blue: 0.207, alpha: 1)
   static var basic7 = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
   static var basic8 = UIColor(red: 0, green: 0, blue: 0, alpha: 0.31)
- 
 }

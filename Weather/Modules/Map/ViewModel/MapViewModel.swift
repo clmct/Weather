@@ -61,7 +61,20 @@ final class MapViewModel: MapViewModelProtocol {
     }
   }
   
-  func getCityName(location: CLLocation) {
+  func showWeather() {
+    if let city = city {
+      delegate?.showWeather(city: city)
+    }
+  }
+  
+  func requestLocationCard(coordinate: CLLocationCoordinate2D) {
+    self.coordinate = coordinate
+    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    self.coordinateString = location.coordinateString
+    getCityName(location: location)
+  }
+  
+  private func getCityName(location: CLLocation) {
     didRequestStart?()
     geocodingService.getLocationName(location: location) { [weak self] result in
       switch result {
@@ -79,18 +92,5 @@ final class MapViewModel: MapViewModelProtocol {
         }
       }
     }
-  }
-  
-  func showWeather() {
-    if let city = city {
-      delegate?.showWeather(city: city)
-    }
-  }
-  
-  func requestLocationCard(coordinate: CLLocationCoordinate2D) {
-    self.coordinate = coordinate
-    let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    self.coordinateString = location.coordinateString
-    getCityName(location: location)
   }
 }

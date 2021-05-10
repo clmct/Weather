@@ -9,7 +9,7 @@ final class LocationCardView: UIView {
   var didTapShowWeather: (() -> Void)?
   var didTapCloseView: (() -> Void)?
   
-  // MARK: Life cicle
+  // MARK: Life cycle
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
