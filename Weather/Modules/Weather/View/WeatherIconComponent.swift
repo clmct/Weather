@@ -18,7 +18,7 @@ final class WeatherIconComponent: UIView {
   
   // MARK: Methods
   func configure(image: String, title: String) {
-    if let url = URL(string: "http://openweathermap.org/img/wn/\(image)@2x.png") {
+    if let url = NetworkRouter.getImage(code: image).getURL() {
       imageView.kf.setImage(with: url)
     } else {
       let banner = NotificationBanner(title: "Icon", subtitle: "Icon hadn't loaded", style: .warning)

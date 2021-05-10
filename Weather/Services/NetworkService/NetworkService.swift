@@ -12,13 +12,8 @@ protocol NetworkServiceProtocol {
 
 final class NetworkService {
   private func fetch<T: Codable>(router: NetworkRouter, completion: @escaping (Result<T, NetworkError>) -> Void) {
-    var components = URLComponents()
-    components.scheme = router.scheme
-    components.host = router.host
-    components.path = router.path
-    components.queryItems = router.queryItems
 
-    guard let url = components.url else {
+    guard let url = router.getURL() else {
       completion(.failure(.serverResponse))
       Logger.serverError(messageLog: "url error")
       return
