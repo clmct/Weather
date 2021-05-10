@@ -1,12 +1,5 @@
 import UIKit
 
-extension WeatherComponent: ConfigurableProtocol {
-  func configure(title: String, description: String) {
-    titleLabel.text = title
-    descriptionLabel.text = description
-  }
-}
-
 final class WeatherComponent: UIView {
   private let titleLabel = UILabel()
   private let descriptionLabel = UILabel()
@@ -21,6 +14,13 @@ final class WeatherComponent: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: Methods
+  func configure(title: String, description: String) {
+    titleLabel.text = title
+    descriptionLabel.text = description
+  }
+  
+  // MARK: Layout
   private func setupTitleLabel() {
     addSubview(titleLabel)
     titleLabel.snp.makeConstraints { make in
@@ -39,5 +39,4 @@ final class WeatherComponent: UIView {
     descriptionLabel.textColor = .basic4
     descriptionLabel.font = .basic5
   }
-  
 }

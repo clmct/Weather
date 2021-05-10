@@ -20,7 +20,6 @@ final class NetworkService {
 
     guard let url = components.url else {
       completion(.failure(.serverResponse))
-      
       return
     }
     var urlRequest = URLRequest(url: url)
@@ -33,10 +32,9 @@ final class NetworkService {
     URLSession(configuration: config).dataTask(with: urlRequest) { data, response, error in
       guard error == nil else {
         completion(.failure(.noInternet))
-        
         return
       }
-      print(url)
+      
       guard let response = response as? HTTPURLResponse, 200...299 ~= response.statusCode else {
         completion(.failure(.serverResponse))
         return
@@ -44,7 +42,6 @@ final class NetworkService {
 
       guard let data = data else {
         completion(.failure(.serverResponse))
-        
         return
       }
 
@@ -58,7 +55,6 @@ final class NetworkService {
         }
       } else {
         completion(.failure(.serverResponse))
-        
       }
 
     }.resume()
@@ -73,7 +69,7 @@ extension NetworkService: NetworkServiceProtocol {
       completion(.failure(.noInternet))
       return
     }
-    print(key)
+    
     self.fetch(router: .getWeather(city: city, key: key)) { (result: Result<CityWeather, NetworkError>) in
       completion(result)
     }

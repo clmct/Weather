@@ -1,6 +1,7 @@
 import UIKit
 
 final class LocationCardView: UIView {
+  // MARK: Properties
   private let locationNameLabel = UILabel()
   private let locationCoordinateLabel = UILabel()
   private let showWeatherButton = UIButton(type: .system)
@@ -8,6 +9,7 @@ final class LocationCardView: UIView {
   var didTapShowWeather: (() -> Void)?
   var didTapCloseView: (() -> Void)?
   
+  // MARK: Life cicle
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupView()
@@ -17,24 +19,25 @@ final class LocationCardView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: Methods
   func configure(city: String, coordinate: String) {
     locationNameLabel.text = city
     locationCoordinateLabel.text = coordinate
   }
   
+  // MARK: Actions
   @objc
-  func showWeather() {
+  private func showWeather() {
     didTapShowWeather?()
   }
   
   @objc
-  func closeView() {
+  private func closeView() {
     didTapCloseView?()
   }
   
+  // MARK: Layout
   private func setupView() {
-    locationNameLabel.text = "Milan"
-    locationCoordinateLabel.text = "45°16'44.7 N 9°43'33.2E"
     setupLayer()
     setupLocationNameLabel()
     setupLocationCoordinateLabel()
@@ -44,7 +47,7 @@ final class LocationCardView: UIView {
   
   private func setupLayer() {
     layer.cornerRadius = 8
-    layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.31).cgColor
+    layer.shadowColor = UIColor.basic8.cgColor
     layer.shadowOpacity = 1
     layer.shadowOffset = .zero
     layer.shadowRadius = 16
@@ -98,8 +101,6 @@ final class LocationCardView: UIView {
     }
     
     closeCardViewButton.setImage(UIImage(named: "close"), for: .normal)
-    
     closeCardViewButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
   }
-  
 }

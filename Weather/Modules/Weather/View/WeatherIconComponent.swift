@@ -1,18 +1,6 @@
 import UIKit
 import Kingfisher
 
-extension WeatherIconComponent {
-  func configure(image: String, title: String) {
-    if let url = URL(string: "http://openweathermap.org/img/wn/\(image)@2x.png") {
-      imageView.kf.setImage(with: url)
-      titleLabel.text = title
-    } else {
-      print("FAILURE")
-    }
-    titleLabel.text = title
-  }
-}
-
 final class WeatherIconComponent: UIView {
   private let imageView = UIImageView()
   private let titleLabel = UILabel()
@@ -27,6 +15,15 @@ final class WeatherIconComponent: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // MARK: Methods
+  func configure(image: String, title: String) {
+    if let url = URL(string: "http://openweathermap.org/img/wn/\(image)@2x.png") {
+      imageView.kf.setImage(with: url)
+    }
+    titleLabel.text = title
+  }
+  
+  // MARK: Layout
   private func setupImageView() {
     addSubview(imageView)
     imageView.snp.makeConstraints { make in
@@ -51,5 +48,4 @@ final class WeatherIconComponent: UIView {
     titleLabel.numberOfLines = 2
     titleLabel.lineBreakMode = .byWordWrapping
   }
-  
 }

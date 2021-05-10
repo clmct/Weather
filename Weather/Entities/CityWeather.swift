@@ -6,4 +6,3 @@ struct CityWeather: Codable {
   let wind: Wind
   let name: String
 }
-

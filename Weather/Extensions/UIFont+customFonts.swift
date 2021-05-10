@@ -7,5 +7,6 @@ extension UIFont {
   static let basic4 = UIFont.systemFont(ofSize: 18)
   static let basic5 = UIFont.boldSystemFont(ofSize: 18)
   static let basic6 = UIFont(name: "SFProText-Regular", size: 18)
-  
+  static let basic7 = UIFont.boldSystemFont(ofSize: 120)
+  static let basic8 = UIFont.systemFont(ofSize: 40)
 }

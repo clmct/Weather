@@ -1,8 +1,8 @@
 import UIKit
 
 final class WeatherViewController: UIViewController {
+  // MARK: Properties
   var viewModel: WeatherViewModelProtocol?
-  
   private let pressureView = WeatherComponent()
   private let windView = WeatherComponent()
   private let humidityView = WeatherComponent()
@@ -10,10 +10,9 @@ final class WeatherViewController: UIViewController {
   private let degreesCelsiusLabel = UILabel()
   private let degreesCelsiusSymbolLabel = UILabel()
   private let loader = UIActivityIndicatorView(style: .medium)
-  
   private let imageView = UIImageView()
-  private let mask = UIImage()
   
+  // MARK: Life cicle
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLayout()
@@ -21,25 +20,29 @@ final class WeatherViewController: UIViewController {
     viewModel?.getWeather()
   }
   
-  // MARK: BindToViewModel
+  deinit {
+    viewModel?.closeViewController()
+  }
+  
+  // MARK: Binding
   private func bindToViewModel() {
     viewModel?.updateView = { [weak self] in
       guard let self = self else { return }
-      guard let pressure = self.viewModel?.pressure else { return }
-      guard let windDeg = self.viewModel?.windDeg else { return }
-      guard let windSpeed = self.viewModel?.windSpeed else { return }
-      guard let humidity = self.viewModel?.humidity else { return }
-      guard let temp = self.viewModel?.temp else { return }
-      guard let name = self.viewModel?.cityName else { return }
-      guard let description = self.viewModel?.description else { return }
-      guard let icon = self.viewModel?.icon else { return }
-      print(name, pressure, windDeg, windSpeed, humidity, temp, icon)
+      guard let pressure = self.viewModel?.pressure,
+            let windDeg = self.viewModel?.windDeg,
+            let windSpeed = self.viewModel?.windSpeed,
+            let humidity = self.viewModel?.humidity,
+            let temp = self.viewModel?.temp,
+            let name = self.viewModel?.cityName,
+            let description = self.viewModel?.description,
+            let icon = self.viewModel?.icon else { return }
+      
       self.title = name
       self.degreesCelsiusLabel.text = "\(temp)" // 23
       self.degreesCelsiusSymbolLabel.text = "\u{2103}"
       self.pressureView.configure(title: "PRESSURE", description: "\(pressure) mm Hg") //763.53 mm Hg
       self.windView.configure(title: "WIND", description: "\(windDeg) \(windSpeed) m/s") //N 3 m/s
-      self.humidityView.configure(title: "HUMIDITY", description: "\(humidity)%")//58%
+      self.humidityView.configure(title: "HUMIDITY", description: "\(humidity)%") //58%
       self.imageView.image = UIImage(named: description)
       self.iconView.configure(image: icon, title: description)
     }
@@ -55,6 +58,7 @@ final class WeatherViewController: UIViewController {
     }
   }
   
+  // MARK: Layout
   private func setupLayout() {
     view.backgroundColor = .white
     setupImageView()
@@ -80,26 +84,21 @@ final class WeatherViewController: UIViewController {
     degreesCelsiusLabel.snp.makeConstraints { make in
       make.leading.equalToSuperview().offset(15)
       make.top.equalTo(view.safeAreaLayoutGuide).offset(15)
-      make.width.equalTo(158)
       make.height.equalTo(143)
     }
-    
-    degreesCelsiusLabel.textColor = UIColor(red: 0.207, green: 0.207, blue: 0.207, alpha: 1)
-    degreesCelsiusLabel.font = .boldSystemFont(ofSize: 120)
-//    degreesCelsiusLabel.text = "23"
+    degreesCelsiusLabel.textColor = .basic6
+    degreesCelsiusLabel.font = .basic7
   }
   
   private func setupDegreesCelsiusSymbolLabel() {
     view.addSubview(degreesCelsiusSymbolLabel)
     degreesCelsiusSymbolLabel.snp.makeConstraints { make in
-      make.leading.equalTo(degreesCelsiusLabel.snp.trailing).offset(-15)
+      make.leading.equalTo(degreesCelsiusLabel.snp.trailing)
       make.top.equalTo(degreesCelsiusLabel.snp.top)
       make.height.width.equalTo(100)
     }
-    degreesCelsiusSymbolLabel.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
-    degreesCelsiusSymbolLabel.font = .systemFont(ofSize: 40)
-//    degreesCelsiusSymbolLabel.text = "\u{2103}"
-   
+    degreesCelsiusSymbolLabel.textColor = .basic7
+    degreesCelsiusSymbolLabel.font = .basic8
   }
   
   private func setupIconView() {
@@ -120,8 +119,6 @@ final class WeatherViewController: UIViewController {
       make.width.equalTo(140)
       make.height.equalTo(50)
     }
-    
-//    pressureView.configure(title: "PRESSURE", description: "763.53 mm Hg")
   }
   
   private func setupWindView() {
@@ -132,8 +129,6 @@ final class WeatherViewController: UIViewController {
       make.width.equalTo(140)
       make.height.equalTo(50)
     }
-    
-//    windView.configure(title: "WIND", description: "N 3 m/s")
   }
   
   private func setupHumidityView() {
@@ -144,8 +139,6 @@ final class WeatherViewController: UIViewController {
       make.width.equalTo(140)
       make.height.equalTo(50)
     }
-    
-//    humidityView.configure(title: "HUMIDITY", description: "58%")
   }
   
   private func setupImageView() {
@@ -155,15 +148,11 @@ final class WeatherViewController: UIViewController {
       make.width.equalTo(240)
       make.height.equalTo(576)
     }
-
     imageView.contentMode = .bottomRight
-//    imageView.backgroundColor = .red
-//    imageView.image = UIImage(named: "Rain")
     let mask = CALayer()
     mask.contents = UIImage(named: "Mask")?.cgImage
     mask.frame = CGRect(x: 0, y: 0, width: 240, height: 576)
     imageView.layer.mask = mask
     imageView.layer.masksToBounds = true
   }
-
 }

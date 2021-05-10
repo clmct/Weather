@@ -14,28 +14,39 @@ protocol WeatherViewModelProtocol {
   var didRequestStart: (() -> Void)? { get set }
   var didRequestEnd: (() -> Void)? { get set }
   func getWeather()
+  func closeViewController()
+}
+
+protocol WeatherViewModelDelegate: class {
+  func showNetworkError(networkError: NetworkError, completion: @escaping (() -> Void) )
+  func closeViewController()
 }
 
 final class WeatherViewModel: WeatherViewModelProtocol {
-  var description: String?
   var pressure: Int?
-  var windSpeed: Double?
-  var windDeg: String?
-  var cityName: String?
   var humidity: Int?
   var temp: Int?
   var image: UIImage?
+  var windSpeed: Double?
+  var windDeg: String?
+  var cityName: String?
+  var description: String?
   var icon: String?
   var updateView: (() -> Void)?
   var didRequestStart: (() -> Void)?
   var didRequestEnd: (() -> Void)?
-  var networkService: NetworkServiceProtocol
-  var city: String
+  weak var delegate: WeatherViewModelDelegate?
   
+  private let networkService: NetworkServiceProtocol
+  private let city: String
   
   init(networkService: NetworkServiceProtocol, city: String) {
     self.networkService = networkService
     self.city = city
+  }
+  
+  func closeViewController() {
+    delegate?.closeViewController()
   }
   
   func getWeather() {
@@ -56,14 +67,13 @@ final class WeatherViewModel: WeatherViewModelProtocol {
           self.didRequestEnd?()
         }
         
-        break
-      case .failure(let error):
+      case .failure(let networkError):
         DispatchQueue.main.async {
+          self.delegate?.showNetworkError(networkError: networkError) { [weak self] in
+            self?.getWeather()
+          }
           self.didRequestEnd?()
-//          self.didRequestError?()
         }
-        print(error)
-        break
       }
     }
   }
