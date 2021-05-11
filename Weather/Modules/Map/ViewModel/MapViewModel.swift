@@ -2,15 +2,14 @@ import Foundation
 import MapKit
 
 protocol MapViewModelProtocol {
-  var city: String? { get }
+  var cityName: String? { get }
   var coordinate: CLLocationCoordinate2D? { get }
-  var coordinateString: String? { get }
+  var coordinateDescription: String? { get }
   var didRequestShowCard: (() -> Void)? { get set }
   var didRequestHideCard: (() -> Void)? { get set }
   var didRequestShowError: (() -> Void)? { get set }
   var didRequestStart: (() -> Void)? { get set }
   var didRequestEnd: (() -> Void)? { get set }
-  var delegate: MapViewModelDelegate? { get set }
   func requestShowLocationCard(coordinate: CLLocationCoordinate2D)
   func requestHideLocationCard()
   func showWeather()
@@ -18,13 +17,13 @@ protocol MapViewModelProtocol {
   }
 
 protocol MapViewModelDelegate: class {
-  func showWeather(city: String)
+  func requiredShowWeather(cityName: String)
 }
 
 final class MapViewModel: MapViewModelProtocol {
-  var city: String?
+  var cityName: String?
   var coordinate: CLLocationCoordinate2D?
-  var coordinateString: String?
+  var coordinateDescription: String?
   var didRequestShowCard: (() -> Void)?
   var didRequestHideCard: (() -> Void)?
   var didRequestShowError: (() -> Void)?
@@ -38,14 +37,13 @@ final class MapViewModel: MapViewModelProtocol {
   }
   
   func showWeather() {
-    if let city = city {
-      delegate?.showWeather(city: city)
-    }
+    guard let cityName = cityName else { return }
+    delegate?.requiredShowWeather(cityName: cityName)
   }
   
   func requestHideLocationCard() {
-    coordinateString = nil
-    city = nil
+    coordinateDescription = nil
+    cityName = nil
     coordinate = nil
     didRequestHideCard?()
   }
@@ -56,7 +54,7 @@ final class MapViewModel: MapViewModelProtocol {
       DispatchQueue.main.async {
         switch result {
         case .success(let coordinate):
-          self?.requestShowLocationCard(city: text, coordinate: coordinate)
+          self?.requestShowLocationCard(cityName: text, coordinate: coordinate)
         case .failure(let error):
           Logger.geocodingError(messageLog: error.localizedDescription)
           self?.requestHideLocationCard()
@@ -72,8 +70,8 @@ final class MapViewModel: MapViewModelProtocol {
     geocodingService.getLocationName(location: location) { [weak self] result in
       DispatchQueue.main.async {
         switch result {
-        case .success(let city):
-          self?.requestShowLocationCard(city: city, coordinate: coordinate)
+        case .success(let cityName):
+          self?.requestShowLocationCard(cityName: cityName, coordinate: coordinate)
         case .failure(let error):
           Logger.geocodingError(messageLog: error.localizedDescription)
           self?.requestHideLocationCard()
@@ -83,10 +81,10 @@ final class MapViewModel: MapViewModelProtocol {
     }
   }
   
-  private func requestShowLocationCard(city: String, coordinate: CLLocationCoordinate2D) {
+  private func requestShowLocationCard(cityName: String, coordinate: CLLocationCoordinate2D) {
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    coordinateString = location.coordinateString
-    self.city = city
+    self.coordinateDescription = location.coordinateDescription
+    self.cityName = cityName
     self.coordinate = coordinate
     didRequestShowCard?()
   }

@@ -4,10 +4,10 @@ import NotificationBannerSwift
 final class WeatherViewController: UIViewController {
   // MARK: Properties
   var viewModel: WeatherViewModelProtocol?
-  private let pressureView = WeatherComponent()
-  private let windView = WeatherComponent()
-  private let humidityView = WeatherComponent()
-  private let iconView = WeatherIconComponent()
+  private let pressureView = WeatherComponentView()
+  private let windView = WeatherComponentView()
+  private let humidityView = WeatherComponentView()
+  private let iconView = WeatherIconComponentView()
   private let degreesCelsiusLabel = UILabel()
   private let degreesCelsiusSymbolLabel = UILabel()
   private let loader = UIActivityIndicatorView(style: .medium)
@@ -27,27 +27,19 @@ final class WeatherViewController: UIViewController {
   
   // MARK: Binding
   private func bindToViewModel() {
-    viewModel?.updateView = { [weak self] in
+    viewModel?.didRequestUpdateView = { [weak self] in
       guard let self = self else { return }
       guard let data = self.viewModel?.data else { return }
-      self.title = data.cityName
-      self.degreesCelsiusLabel.text = "\(data.temperature)"
-      self.degreesCelsiusSymbolLabel.text = "\u{2103}"
-      self.pressureView.configure(title: "PRESSURE", description: "\(data.pressure) mm Hg")
-      self.windView.configure(title: "WIND", description: "\(data.windDeg) \(data.windSpeed) m/s")
-      self.humidityView.configure(title: "HUMIDITY", description: "\(data.humidity)%")
-      self.iconView.configure(image: data.icon, title: data.description)
+      self.updateView(data: data)
       if let description = data.description,
-         let image = UIImage(named: description) {
-        self.imageView.image = image
+         let image = UIImage( named: description) {
+        self.setImageView(image: image)
       } else {
-        self.imageView.image = UIImage(named: "broken clouds")
-        let banner = NotificationBanner(title: "Image", subtitle: "Default image had loaded", style: .info)
-        banner.show()
+        self.setDefaultImageView()
       }
     }
     
-    viewModel?.didRequestStart = { [weak self] in
+      viewModel?.didRequestStart = { [weak self] in
       guard let self = self else { return }
       self.loader.startAnimating()
     }
@@ -56,6 +48,37 @@ final class WeatherViewController: UIViewController {
       guard let self = self else { return }
       self.loader.stopAnimating()
     }
+    
+    viewModel?.didRequestShowError = { [weak self] networkError in
+      self?.showError(networkError: networkError)
+    }
+  }
+  
+  private func showError(networkError: NetworkError) {
+    showNetworkError(networkError: networkError) { [weak self] in
+      self?.viewModel?.getWeather()
+    }
+  }
+  
+  private func updateView(data: WeatherViewModelData) {
+    title = data.cityName
+    degreesCelsiusLabel.text = "\(data.temperature)"
+    degreesCelsiusSymbolLabel.text = "\u{2103}"
+    pressureView.configure(title: "PRESSURE", description: "\(data.pressure) mm Hg")
+    windView.configure(title: "WIND", description: "\(data.windDeg) \(data.windSpeed) m/s")
+    humidityView.configure(title: "HUMIDITY", description: "\(data.humidity)%")
+    iconView.configure(image: data.icon, title: data.description)
+    
+  }
+  
+  private func setImageView(image: UIImage) {
+    imageView.image = image
+  }
+  
+  private func setDefaultImageView() {
+    imageView.image = UIImage(named: "broken clouds")
+    let banner = NotificationBanner(title: "Image", subtitle: "Default image had loaded", style: .info)
+    banner.show()
   }
   
   // MARK: Layout

@@ -1,16 +1,16 @@
 import MapKit
 
 extension CLLocation {
-  var coordinateString: String { latitude + " " + longitude }
+  var coordinateDescription: String { latitudeDescription + " " + longitudeDescription }
   
-  var latitude: String {
+  var latitudeDescription: String {
     let degrees = coordinate.latitude.degrees
     let minutes = coordinate.latitude.minutes
     let seconds = coordinate.latitude.seconds
     return String(format: "%d°%d'%.1f\"%@", abs(degrees), abs(minutes), abs(seconds), degrees >= 0 ? "N" : "S")
   }
   
-  var longitude: String {
+  var longitudeDescription: String {
     let degrees = coordinate.longitude.degrees
     let minutes = coordinate.longitude.minutes
     let seconds = coordinate.longitude.seconds

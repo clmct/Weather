@@ -1,6 +1,6 @@
 import UIKit
 
-final class WeatherComponent: UIView {
+final class WeatherComponentView: UIView {
   private let titleLabel = UILabel()
   private let descriptionLabel = UILabel()
   

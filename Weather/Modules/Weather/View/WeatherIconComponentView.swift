@@ -2,7 +2,7 @@ import UIKit
 import Kingfisher
 import NotificationBannerSwift
 
-final class WeatherIconComponent: UIView {
+final class WeatherIconComponentView: UIView {
   private let imageView = UIImageView()
   private let titleLabel = UILabel()
   

@@ -24,15 +24,9 @@ final class MapViewController: UIViewController {
   private func bindToViewModel() {
     viewModel?.didRequestShowCard = { [weak self] in
       guard let self = self else { return }
+      guard let coordinate = self.viewModel?.coordinate else { return }
+      self.setCenterAndAnnotationOnMap(coordinate: coordinate)
       self.showLocationCardView()
-      if let coordinate = self.viewModel?.coordinate {
-        self.mapView.setCenter(coordinate, animated: true)
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = ""
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        self.mapView.addAnnotation(annotation)
-      }
     }
     
     viewModel?.didRequestHideCard = { [weak self] in
@@ -53,52 +47,60 @@ final class MapViewController: UIViewController {
   }
   
   // MARK: Actions
+  private func setCenterAndAnnotationOnMap(coordinate: CLLocationCoordinate2D) {
+    mapView.setCenter(coordinate, animated: true)
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = coordinate
+    annotation.title = ""
+    mapView.removeAnnotations(self.mapView.annotations)
+    mapView.addAnnotation(annotation)
+  }
+  
   private func hideLocationCardView() {
+    locationCardView.snp.remakeConstraints { make in
+      make.leading.equalToSuperview().offset(16)
+      make.trailing.equalToSuperview().offset(-16)
+      make.height.equalTo(160)
+      make.bottom.equalTo(mapView.safeAreaLayoutGuide).offset(200)
+    }
     UIView.animate(withDuration: 0.3) {
-      self.locationCardView.snp.remakeConstraints { make in
-        make.centerX.equalToSuperview()
-        make.leading.equalToSuperview().offset(16)
-        make.trailing.equalToSuperview().offset(-16)
-        make.height.equalTo(160)
-        make.bottom.equalTo(self.mapView.safeAreaLayoutGuide).offset(200)
-      }
       self.view.layoutIfNeeded()
     }
   }
   
   private func showLocationCardView() {
+    guard let cityName = viewModel?.cityName,
+          let coordinateDescription = viewModel?.coordinateDescription else { return }
+    locationCardView.configure(city: cityName, coordinateDescription: coordinateDescription)
+    
     if isShowKeyboard {
       showLocationCardViewOverKeyboard()
-      return
+    } else {
+      showLocationCardViewBelow()
     }
-    
-    if let city = viewModel?.city, let coordinate = viewModel?.coordinateString {
-      locationCardView.configure(city: city, coordinate: coordinate)
-        UIView.animate(withDuration: 0.3) {
-          self.locationCardView.snp.remakeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(160)
-            make.bottom.equalTo(self.mapView.safeAreaLayoutGuide).offset(-16)
-          }
-          self.view.layoutIfNeeded()
-        }
+  }
+  
+  private func showLocationCardViewBelow() {
+    locationCardView.snp.remakeConstraints { make in
+      make.leading.equalToSuperview().offset(16)
+      make.trailing.equalToSuperview().offset(-16)
+      make.height.equalTo(160)
+      make.bottom.equalTo(mapView.safeAreaLayoutGuide).offset(-16)
+    }
+    UIView.animate(withDuration: 0.3) {
+      self.view.layoutIfNeeded()
     }
   }
   
   private func showLocationCardViewOverKeyboard() {
-    if let city = viewModel?.city, let coordinate = viewModel?.coordinateString {
-      locationCardView.configure(city: city, coordinate: coordinate)
-        UIView.animate(withDuration: 0.3) {
-          self.locationCardView.snp.remakeConstraints { make in
-            make.bottom.equalToSuperview().offset(-(self.keyboardHeight + 16))
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(160)
-          }
-          self.view.layoutIfNeeded()
-        }
+    locationCardView.snp.remakeConstraints { make in
+      make.leading.equalToSuperview().offset(16)
+      make.trailing.equalToSuperview().offset(-16)
+      make.height.equalTo(160)
+      make.bottom.equalToSuperview().offset(-(keyboardHeight + 16))
+    }
+    UIView.animate(withDuration: 0.3) {
+      self.view.layoutIfNeeded()
     }
   }
   
@@ -111,9 +113,7 @@ final class MapViewController: UIViewController {
   
   @objc
   private func keyboardWillShow(notification: NSNotification) {
-    if let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-      keyboardHeight = keyboardRect.size.height
-    }
+    guard isSetKeyboardHeight(notification: notification) == true else { return }
     isShowKeyboard = true
     showLocationCardView()
   }
@@ -122,6 +122,15 @@ final class MapViewController: UIViewController {
   private func keyboardWillHide(notification: NSNotification) {
     isShowKeyboard = false
     showLocationCardView()
+  }
+  
+  private func isSetKeyboardHeight(notification: NSNotification) -> Bool {
+    guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+                                as? NSValue)?.cgRectValue else {
+      return false
+    }
+    keyboardHeight = keyboardRect.size.height
+    return true
   }
   
   // MARK: Keyboard
@@ -189,10 +198,17 @@ final class MapViewController: UIViewController {
     mapView.mapType = .standard
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(gestureRecognizer:)))
     mapView.addGestureRecognizer(gestureRecognizer)
-    let latitude = CLLocationDegrees(50)
-    let longitude = CLLocationDegrees(10)
-    let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-                                              latitudinalMeters: 2000000, longitudinalMeters: 2000000)
+    setupDefaultRegion()
+  }
+  
+  private func setupDefaultRegion() {
+    let latitude = CLLocationDegrees(Constants.DefaultLocation.latitude.rawValue)
+    let longitude = CLLocationDegrees(Constants.DefaultLocation.longitude.rawValue)
+    let meters = CLLocationDistance(Constants.DefaultLocation.meters.rawValue)
+    let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude,
+                                                                             longitude: longitude),
+                                              latitudinalMeters: meters,
+                                              longitudinalMeters: meters)
     mapView.setRegion(coordinateRegion, animated: true)
   }
 }

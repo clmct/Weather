@@ -19,7 +19,7 @@
 		B22EDBCF2639918F004D18A7 /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EDBCE2639918F004D18A7 /* GeocodingService.swift */; };
 		B24339BE2645427E00607448 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339BD2645427E00607448 /* ServiceAssembly.swift */; };
 		B24339C2264566FA00607448 /* CityWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C1264566FA00607448 /* CityWeather.swift */; };
-		B24339C52645671600607448 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C42645671600607448 /* Main.swift */; };
+		B24339C52645671600607448 /* MainWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C42645671600607448 /* MainWeather.swift */; };
 		B24339C82645672000607448 /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C72645672000607448 /* Wind.swift */; };
 		B25647332643EFCA00165943 /* WeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25647322643EFCA00165943 /* WeatherCoordinator.swift */; };
 		B261AD0C2638617A0033BE0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B261AD0B2638617A0033BE0A /* AppDelegate.swift */; };
@@ -34,10 +34,15 @@
 		B282F323264829C600FA81E5 /* NetworkErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B282F322264829C600FA81E5 /* NetworkErrorViewController.swift */; };
 		B282F32626482A2100FA81E5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B282F32526482A2100FA81E5 /* Constants.swift */; };
 		B282F32B26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B282F32A26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift */; };
-		B2CC764B26428475006DD3AE /* WeatherComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC764A26428475006DD3AE /* WeatherComponent.swift */; };
-		B2CC76572642928B006DD3AE /* WeatherIconComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC76562642928B006DD3AE /* WeatherIconComponent.swift */; };
-		B2EE88BD263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift */; };
-		B2EE88C0263AFEE800DE694E /* CLLocation+dmsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE88BF263AFEE800DE694E /* CLLocation+dmsString.swift */; };
+		B2B6255C264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B6255B264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift */; };
+		B2B62567264AE98C00CD3BFD /* BinaryFloatingPoint+minutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B62566264AE98C00CD3BFD /* BinaryFloatingPoint+minutes.swift */; };
+		B2B6256A264AE99E00CD3BFD /* BinaryFloatingPoint+seconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B62569264AE99E00CD3BFD /* BinaryFloatingPoint+seconds.swift */; };
+		B2B62581264AEBDF00CD3BFD /* DegreesFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B62580264AEBDF00CD3BFD /* DegreesFormatter.swift */; };
+		B2B62584264AEBEC00CD3BFD /* TemperatureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B62583264AEBEC00CD3BFD /* TemperatureFormatter.swift */; };
+		B2CC764B26428475006DD3AE /* WeatherComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC764A26428475006DD3AE /* WeatherComponentView.swift */; };
+		B2CC76572642928B006DD3AE /* WeatherIconComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC76562642928B006DD3AE /* WeatherIconComponentView.swift */; };
+		B2EE88BD263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift */; };
+		B2EE88C0263AFEE800DE694E /* CLLocation+coordinateDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE88BF263AFEE800DE694E /* CLLocation+coordinateDescription.swift */; };
 		B2FBBFFB2641890F009FE9D4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FBBFFA2641890F009FE9D4 /* NetworkService.swift */; };
 		B2FBC001264189B5009FE9D4 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FBC000264189B5009FE9D4 /* NetworkRouter.swift */; };
 		B2FBC01026419872009FE9D4 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FBC00F26419872009FE9D4 /* Weather.swift */; };
@@ -56,7 +61,7 @@
 		B22EDBCE2639918F004D18A7 /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
 		B24339BD2645427E00607448 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
 		B24339C1264566FA00607448 /* CityWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeather.swift; sourceTree = "<group>"; };
-		B24339C42645671600607448 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		B24339C42645671600607448 /* MainWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeather.swift; sourceTree = "<group>"; };
 		B24339C72645672000607448 /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
 		B24EFCEA2647C2CB0032B07E /* Token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Token.xcconfig; sourceTree = "<group>"; };
 		B25647322643EFCA00165943 /* WeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoordinator.swift; sourceTree = "<group>"; };
@@ -74,10 +79,15 @@
 		B282F322264829C600FA81E5 /* NetworkErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorViewController.swift; sourceTree = "<group>"; };
 		B282F32526482A2100FA81E5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B282F32A26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+networkErrorShowing.swift"; sourceTree = "<group>"; };
-		B2CC764A26428475006DD3AE /* WeatherComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherComponent.swift; sourceTree = "<group>"; };
-		B2CC76562642928B006DD3AE /* WeatherIconComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconComponent.swift; sourceTree = "<group>"; };
-		B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+dms.swift"; sourceTree = "<group>"; };
-		B2EE88BF263AFEE800DE694E /* CLLocation+dmsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+dmsString.swift"; sourceTree = "<group>"; };
+		B2B6255B264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherViewController+networkErrorShowingProtocol.swift"; sourceTree = "<group>"; };
+		B2B62566264AE98C00CD3BFD /* BinaryFloatingPoint+minutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+minutes.swift"; sourceTree = "<group>"; };
+		B2B62569264AE99E00CD3BFD /* BinaryFloatingPoint+seconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+seconds.swift"; sourceTree = "<group>"; };
+		B2B62580264AEBDF00CD3BFD /* DegreesFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreesFormatter.swift; sourceTree = "<group>"; };
+		B2B62583264AEBEC00CD3BFD /* TemperatureFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureFormatter.swift; sourceTree = "<group>"; };
+		B2CC764A26428475006DD3AE /* WeatherComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherComponentView.swift; sourceTree = "<group>"; };
+		B2CC76562642928B006DD3AE /* WeatherIconComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconComponentView.swift; sourceTree = "<group>"; };
+		B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+degrees.swift"; sourceTree = "<group>"; };
+		B2EE88BF263AFEE800DE694E /* CLLocation+coordinateDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+coordinateDescription.swift"; sourceTree = "<group>"; };
 		B2FBBFFA2641890F009FE9D4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		B2FBC000264189B5009FE9D4 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		B2FBC00F26419872009FE9D4 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -204,8 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				B22EDBC826398CA3004D18A7 /* WeatherViewController.swift */,
-				B2CC764A26428475006DD3AE /* WeatherComponent.swift */,
-				B2CC76562642928B006DD3AE /* WeatherIconComponent.swift */,
+				B2CC764A26428475006DD3AE /* WeatherComponentView.swift */,
+				B2CC76562642928B006DD3AE /* WeatherIconComponentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -231,8 +241,9 @@
 		B261AD0A2638617A0033BE0A /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-				B222971C264944AA0061639E /* Logger */,
 				B24EFCEA2647C2CB0032B07E /* Token.xcconfig */,
+				B2B6257E264AEBCC00CD3BFD /* Heplers */,
+				B222971C264944AA0061639E /* Logger */,
 				B2FBC00E2641985D009FE9D4 /* Entities */,
 				B2FBBFF6264183C6009FE9D4 /* SupportingFiles */,
 				B261AD35263877120033BE0A /* Modules */,
@@ -276,14 +287,26 @@
 			path = NetworkError;
 			sourceTree = "<group>";
 		};
+		B2B6257E264AEBCC00CD3BFD /* Heplers */ = {
+			isa = PBXGroup;
+			children = (
+				B2B62580264AEBDF00CD3BFD /* DegreesFormatter.swift */,
+				B2B62583264AEBEC00CD3BFD /* TemperatureFormatter.swift */,
+			);
+			path = Heplers;
+			sourceTree = "<group>";
+		};
 		B2EE88BA263AFE9C00DE694E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				B261AD572638882B0033BE0A /* UIColor+customColors.swift */,
 				B261AD5A263888380033BE0A /* UIFont+customFonts.swift */,
-				B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift */,
-				B2EE88BF263AFEE800DE694E /* CLLocation+dmsString.swift */,
 				B282F32A26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift */,
+				B2B6255B264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift */,
+				B2EE88BF263AFEE800DE694E /* CLLocation+coordinateDescription.swift */,
+				B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift */,
+				B2B62566264AE98C00CD3BFD /* BinaryFloatingPoint+minutes.swift */,
+				B2B62569264AE99E00CD3BFD /* BinaryFloatingPoint+seconds.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -302,7 +325,7 @@
 			children = (
 				B24339C1264566FA00607448 /* CityWeather.swift */,
 				B2FBC00F26419872009FE9D4 /* Weather.swift */,
-				B24339C42645671600607448 /* Main.swift */,
+				B24339C42645671600607448 /* MainWeather.swift */,
 				B24339C72645672000607448 /* Wind.swift */,
 				B282F32526482A2100FA81E5 /* Constants.swift */,
 				B223F6872649C57600073526 /* WeatherViewModelData.swift */,
@@ -441,15 +464,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2CC764B26428475006DD3AE /* WeatherComponent.swift in Sources */,
+				B2B62581264AEBDF00CD3BFD /* DegreesFormatter.swift in Sources */,
+				B2CC764B26428475006DD3AE /* WeatherComponentView.swift in Sources */,
 				B22EDBC426398C45004D18A7 /* AppCoordinator.swift in Sources */,
 				B24339C82645672000607448 /* Wind.swift in Sources */,
 				B22EDBCC26398CB7004D18A7 /* WeatherViewModel.swift in Sources */,
 				B22EDBC926398CA3004D18A7 /* WeatherViewController.swift in Sources */,
+				B2B62567264AE98C00CD3BFD /* BinaryFloatingPoint+minutes.swift in Sources */,
 				B282F32626482A2100FA81E5 /* Constants.swift in Sources */,
-				B24339C52645671600607448 /* Main.swift in Sources */,
+				B24339C52645671600607448 /* MainWeather.swift in Sources */,
 				B282F323264829C600FA81E5 /* NetworkErrorViewController.swift in Sources */,
-				B2EE88C0263AFEE800DE694E /* CLLocation+dmsString.swift in Sources */,
+				B2EE88C0263AFEE800DE694E /* CLLocation+coordinateDescription.swift in Sources */,
 				B22EDBCF2639918F004D18A7 /* GeocodingService.swift in Sources */,
 				B223F6882649C57600073526 /* WeatherViewModelData.swift in Sources */,
 				B2FBBFFB2641890F009FE9D4 /* NetworkService.swift in Sources */,
@@ -458,16 +483,19 @@
 				B24339BE2645427E00607448 /* ServiceAssembly.swift in Sources */,
 				B22EDBBF26398BD2004D18A7 /* CoordinatorProtocol.swift in Sources */,
 				B282F32B26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift in Sources */,
+				B2B6255C264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift in Sources */,
 				B261AD102638617A0033BE0A /* MapViewController.swift in Sources */,
-				B2CC76572642928B006DD3AE /* WeatherIconComponent.swift in Sources */,
+				B2CC76572642928B006DD3AE /* WeatherIconComponentView.swift in Sources */,
 				B261AD52263885CE0033BE0A /* LocationCardView.swift in Sources */,
 				B261AD5B263888380033BE0A /* UIFont+customFonts.swift in Sources */,
-				B2EE88BD263AFEBA00DE694E /* BinaryFloatingPoint+dms.swift in Sources */,
+				B2B62584264AEBEC00CD3BFD /* TemperatureFormatter.swift in Sources */,
+				B2EE88BD263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift in Sources */,
 				B25647332643EFCA00165943 /* WeatherCoordinator.swift in Sources */,
 				B261AD0C2638617A0033BE0A /* AppDelegate.swift in Sources */,
 				B261AD582638882B0033BE0A /* UIColor+customColors.swift in Sources */,
 				B2FBC01026419872009FE9D4 /* Weather.swift in Sources */,
 				B222971E264944B70061639E /* Logger.swift in Sources */,
+				B2B6256A264AE99E00CD3BFD /* BinaryFloatingPoint+seconds.swift in Sources */,
 				B261AD0E2638617A0033BE0A /* SceneDelegate.swift in Sources */,
 				B22EDBB226398B10004D18A7 /* MapViewModel.swift in Sources */,
 				B2FBC001264189B5009FE9D4 /* NetworkRouter.swift in Sources */,

@@ -2,23 +2,24 @@ import UIKit
 
 protocol WeatherViewModelProtocol {
   var data: WeatherViewModelData? { get }
-  var updateView: (() -> Void)? { get set }
+  var didRequestUpdateView: (() -> Void)? { get set }
   var didRequestStart: (() -> Void)? { get set }
   var didRequestEnd: (() -> Void)? { get set }
+  var didRequestShowError: ((NetworkError) -> Void)? { get set }
   func getWeather()
   func closeViewController()
 }
 
 protocol WeatherViewModelDelegate: class {
-  func showNetworkError(networkError: NetworkError, completion: @escaping (() -> Void) )
-  func closeViewController()
+  func didClose()
 }
 
 final class WeatherViewModel: WeatherViewModelProtocol {
   var data: WeatherViewModelData?
-  var updateView: (() -> Void)?
+  var didRequestUpdateView: (() -> Void)?
   var didRequestStart: (() -> Void)?
   var didRequestEnd: (() -> Void)?
+  var didRequestShowError: ((NetworkError) -> Void)?
   weak var delegate: WeatherViewModelDelegate?
   private let networkService: NetworkServiceProtocol
   private let city: String
@@ -29,48 +30,32 @@ final class WeatherViewModel: WeatherViewModelProtocol {
   }
   
   func closeViewController() {
-    delegate?.closeViewController()
+    delegate?.didClose()
   }
   
   func getWeather() {
     didRequestStart?()
-    networkService.getWeather(city: city) { (result: Result<CityWeather, NetworkError>) in
+    networkService.getWeather(city: city) { [weak self] (result: Result<CityWeather, NetworkError>) in
+      guard let self = self else { return }
       DispatchQueue.main.async {
         switch result {
         case .success(let weather):
+          let temperature = TemperatureFormatter(kelvinTemperature: weather.main.temp).convertKelvinToCelsius()
+          let windDegrees = DegreesFormatter(degrees: weather.wind.deg).convertToCompassDirection()
           self.data = WeatherViewModelData(pressure: weather.main.pressure,
                                            humidity: weather.main.humidity,
-                                           temperature: Int(weather.main.temp - 273.15),
+                                           temperature: Int(temperature),
                                            windSpeed: weather.wind.speed,
-                                           windDeg: self.getCommonDegrees(deg: weather.wind.deg),
+                                           windDeg: windDegrees,
                                            cityName: weather.name,
                                            description: weather.weather.first?.description,
                                            icon: weather.weather.first?.icon)
-          self.updateView?()
+          self.didRequestUpdateView?()
         case .failure(let networkError):
-          self.delegate?.showNetworkError(networkError: networkError) { [weak self] in
-            self?.getWeather()
-          }
-          self.didRequestEnd?()
+          self.didRequestShowError?(networkError)
         }
         self.didRequestEnd?()
       }
     }
   }
-  
-  private func getCommonDegrees(deg: Int) -> String {
-    switch deg {
-    case 0...90:
-      return "N"
-    case 90...180:
-      return "E"
-    case 180...270:
-      return "S"
-    case 270...360:
-      return "W"
-    default:
-      return ""
-    }
-  }
-  
 }

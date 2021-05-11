@@ -20,9 +20,9 @@ final class LocationCardView: UIView {
   }
   
   // MARK: Methods
-  func configure(city: String, coordinate: String) {
+  func configure(city: String, coordinateDescription: String) {
     locationNameLabel.text = city
-    locationCoordinateLabel.text = coordinate
+    locationCoordinateLabel.text = coordinateDescription
   }
   
   // MARK: Actions
@@ -42,7 +42,7 @@ final class LocationCardView: UIView {
     setupLocationNameLabel()
     setupLocationCoordinateLabel()
     setupShowWeatherButton()
-    setupCloseCardViewButton()
+    setupCloseButton()
   }
   
   private func setupLayer() {
@@ -93,7 +93,7 @@ final class LocationCardView: UIView {
     showWeatherButton.addTarget(self, action: #selector(showWeather), for: .touchUpInside)
   }
   
-  private func setupCloseCardViewButton() {
+  private func setupCloseButton() {
     addSubview(closeCardViewButton)
     closeCardViewButton.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(20)

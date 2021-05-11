@@ -22,8 +22,8 @@ final class MapCoordinator: CoordinatorProtocol {
 
 // MARK: MapViewModelDelegate
 extension MapCoordinator: MapViewModelDelegate {
-  func showWeather(city: String) {
-    let coordinator = WeatherCoordinator(navigationController: navigationController, services: services, city: city)
+  func requiredShowWeather(cityName: String) {
+    let coordinator = WeatherCoordinator(navigationController: navigationController, services: services, city: cityName)
     childCoordinators.append(coordinator)
     coordinator.delegate = self
     coordinator.start()

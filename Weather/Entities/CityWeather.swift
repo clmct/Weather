@@ -2,7 +2,7 @@ import Foundation
 
 struct CityWeather: Codable {
   let weather: [Weather]
-  let main: Main
+  let main: MainWeather
   let wind: Wind
   let name: String
 }
