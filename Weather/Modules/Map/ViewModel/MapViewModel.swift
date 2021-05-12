@@ -31,9 +31,10 @@ final class MapViewModel: MapViewModelProtocol {
   var didRequestEnd: (() -> Void)?
   weak var delegate: MapViewModelDelegate?
   private let geocodingService: GeocodingServiceProtocol
+  typealias Dependencies = HasGeocodingService
 
-  init(geocodingService: GeocodingServiceProtocol) {
-    self.geocodingService = geocodingService
+  init(dependencies: Dependencies) {
+    self.geocodingService = dependencies.geocodingService
   }
   
   func showWeather() {

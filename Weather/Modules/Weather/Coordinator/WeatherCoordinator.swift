@@ -8,20 +8,20 @@ final class WeatherCoordinator: CoordinatorProtocol {
   weak var delegate: WeatherCoordinatorDelegate?
   var navigationController: UINavigationController
   private var childCoordinators: [CoordinatorProtocol] = []
-  private var services: ServiceAssemblyProtocol
+  private var dependencies: Dependencies
   private var city: String
   private weak var viewModel: WeatherViewModel?
   
-  init(navigationController: UINavigationController, services: ServiceAssemblyProtocol, city: String) {
+  init(navigationController: UINavigationController, dependencies: Dependencies, city: String) {
     self.navigationController = navigationController
-    self.services = services
+    self.dependencies = dependencies
     self.city = city
   }
   
   func start() {
     let viewController = WeatherViewController()
     viewController.navigationItem.largeTitleDisplayMode = .always
-    let viewModel = WeatherViewModel(networkService: services.networkService, city: city)
+    let viewModel = WeatherViewModel(dependencies: dependencies, city: city)
     self.viewModel = viewModel
     viewModel.delegate = self
     viewController.viewModel = viewModel

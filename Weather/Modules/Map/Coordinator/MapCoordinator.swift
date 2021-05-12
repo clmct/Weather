@@ -3,17 +3,17 @@ import UIKit
 final class MapCoordinator: CoordinatorProtocol {
   var navigationController: UINavigationController
   private var childCoordinators: [CoordinatorProtocol] = []
-  private var services: ServiceAssemblyProtocol
+  private var dependencies: Dependencies
   
-  init(navigationController: UINavigationController, services: ServiceAssemblyProtocol) {
+  init(navigationController: UINavigationController, dependencies: Dependencies) {
     self.navigationController = navigationController
-    self.services = services
+    self.dependencies = dependencies
   }
   
   func start() {
     let viewController = MapViewController()
     viewController.navigationItem.largeTitleDisplayMode = .never
-    let viewModel = MapViewModel(geocodingService: services.geocodingService)
+    let viewModel = MapViewModel(dependencies: dependencies)
     viewModel.delegate = self
     viewController.viewModel = viewModel
     navigationController.pushViewController(viewController, animated: true)
@@ -23,7 +23,7 @@ final class MapCoordinator: CoordinatorProtocol {
 // MARK: MapViewModelDelegate
 extension MapCoordinator: MapViewModelDelegate {
   func requiredShowWeather(cityName: String) {
-    let coordinator = WeatherCoordinator(navigationController: navigationController, services: services, city: cityName)
+    let coordinator = WeatherCoordinator(navigationController: navigationController, dependencies: dependencies, city: cityName)
     childCoordinators.append(coordinator)
     coordinator.delegate = self
     coordinator.start()

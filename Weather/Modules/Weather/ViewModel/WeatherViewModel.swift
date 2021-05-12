@@ -23,9 +23,10 @@ final class WeatherViewModel: WeatherViewModelProtocol {
   weak var delegate: WeatherViewModelDelegate?
   private let networkService: NetworkServiceProtocol
   private let city: String
+  typealias Dependencies = HasNetworkService
   
-  init(networkService: NetworkServiceProtocol, city: String) {
-    self.networkService = networkService
+  init(dependencies: Dependencies, city: String) {
+    self.networkService = dependencies.networkService
     self.city = city
   }
   

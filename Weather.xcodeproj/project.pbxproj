@@ -17,7 +17,7 @@
 		B22EDBC926398CA3004D18A7 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EDBC826398CA3004D18A7 /* WeatherViewController.swift */; };
 		B22EDBCC26398CB7004D18A7 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EDBCB26398CB6004D18A7 /* WeatherViewModel.swift */; };
 		B22EDBCF2639918F004D18A7 /* GeocodingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22EDBCE2639918F004D18A7 /* GeocodingService.swift */; };
-		B24339BE2645427E00607448 /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339BD2645427E00607448 /* ServiceAssembly.swift */; };
+		B24339BE2645427E00607448 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339BD2645427E00607448 /* Dependencies.swift */; };
 		B24339C2264566FA00607448 /* CityWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C1264566FA00607448 /* CityWeather.swift */; };
 		B24339C52645671600607448 /* MainWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C42645671600607448 /* MainWeather.swift */; };
 		B24339C82645672000607448 /* Wind.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24339C72645672000607448 /* Wind.swift */; };
@@ -60,7 +60,7 @@
 		B22EDBC826398CA3004D18A7 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		B22EDBCB26398CB6004D18A7 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
 		B22EDBCE2639918F004D18A7 /* GeocodingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodingService.swift; sourceTree = "<group>"; };
-		B24339BD2645427E00607448 /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		B24339BD2645427E00607448 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		B24339C1264566FA00607448 /* CityWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeather.swift; sourceTree = "<group>"; };
 		B24339C42645671600607448 /* MainWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWeather.swift; sourceTree = "<group>"; };
 		B24339C72645672000607448 /* Wind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wind.swift; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		B24339A6264539E300607448 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				B24339BD2645427E00607448 /* ServiceAssembly.swift */,
+				B24339BD2645427E00607448 /* Dependencies.swift */,
 				B24339A926453A1800607448 /* GeocodingService */,
 				B24339A726453A0F00607448 /* NetworkService */,
 			);
@@ -492,7 +492,7 @@
 				B2FBBFFB2641890F009FE9D4 /* NetworkService.swift in Sources */,
 				B22EDBB626398B7D004D18A7 /* MapCoordinator.swift in Sources */,
 				B24339C2264566FA00607448 /* CityWeather.swift in Sources */,
-				B24339BE2645427E00607448 /* ServiceAssembly.swift in Sources */,
+				B24339BE2645427E00607448 /* Dependencies.swift in Sources */,
 				B22EDBBF26398BD2004D18A7 /* CoordinatorProtocol.swift in Sources */,
 				B282F32B26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift in Sources */,
 				B2B6255C264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift in Sources */,

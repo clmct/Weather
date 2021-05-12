@@ -3,7 +3,7 @@ import UIKit
 final class AppCoordinator: CoordinatorProtocol {
   var navigationController: UINavigationController
   private var childCoordinators: [CoordinatorProtocol] = []
-  private var services: ServiceAssemblyProtocol = ServiceAssembly()
+  private var dependencies = Dependencies()
   
   init() {
     self.navigationController = UINavigationController()
@@ -11,7 +11,7 @@ final class AppCoordinator: CoordinatorProtocol {
   }
   
   func start() {
-    let coordinator = MapCoordinator(navigationController: navigationController, services: services)
+    let coordinator = MapCoordinator(navigationController: navigationController, dependencies: dependencies)
     childCoordinators.append(coordinator)
     coordinator.start()
   }
