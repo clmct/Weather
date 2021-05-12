@@ -3,9 +3,11 @@ import Kingfisher
 import NotificationBannerSwift
 
 final class WeatherIconComponentView: UIView {
+  // MARK: Properties
   private let imageView = UIImageView()
   private let titleLabel = UILabel()
   
+  // MARK: Life cycle
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupTitleLabel()

@@ -1,9 +1,11 @@
 import UIKit
 
 final class WeatherComponentView: UIView {
+  // MARK: Properties
   private let titleLabel = UILabel()
   private let descriptionLabel = UILabel()
   
+  // MARK: Life cycle
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupTitleLabel()

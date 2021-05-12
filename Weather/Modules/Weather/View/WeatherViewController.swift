@@ -60,6 +60,7 @@ final class WeatherViewController: UIViewController {
     }
   }
   
+  // MARK: Actions
   private func updateView(data: WeatherViewModelData) {
     title = data.cityName
     degreesCelsiusLabel.text = "\(data.temperature)"
@@ -72,7 +73,6 @@ final class WeatherViewController: UIViewController {
                            description: "\(data.humidity)%")
     iconView.configure(image: data.icon,
                        title: data.description)
-    
   }
   
   private func setImageView(image: UIImage) {
