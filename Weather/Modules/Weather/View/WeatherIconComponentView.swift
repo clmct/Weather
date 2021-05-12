@@ -21,7 +21,7 @@ final class WeatherIconComponentView: UIView {
     guard let image = image,
           let title = title,
           let url = NetworkRouter.getImage(code: image).getURL() else {
-      let banner = NotificationBanner(title: "Icon", subtitle: "Icon hadn't loaded", style: .warning)
+      let banner = NotificationBanner(title: Constants.ErrorIcon.title, subtitle: Constants.ErrorIcon.subtitle, style: .warning)
       banner.show()
       return
     }

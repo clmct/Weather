@@ -64,10 +64,14 @@ final class WeatherViewController: UIViewController {
     title = data.cityName
     degreesCelsiusLabel.text = "\(data.temperature)"
     degreesCelsiusSymbolLabel.text = "\u{2103}"
-    pressureView.configure(title: "PRESSURE", description: "\(data.pressure) mm Hg")
-    windView.configure(title: "WIND", description: "\(data.windDeg) \(data.windSpeed) m/s")
-    humidityView.configure(title: "HUMIDITY", description: "\(data.humidity)%")
-    iconView.configure(image: data.icon, title: data.description)
+    pressureView.configure(title: Constants.Weather.pressure,
+                           description: "\(data.pressure) \(Constants.Weather.pressureUnitOfMeasurement)")
+    windView.configure(title: Constants.Weather.wind,
+                       description: "\(data.windDeg) \(data.windSpeed) \(Constants.Weather.windUnitOfMeasurement)")
+    humidityView.configure(title: Constants.Weather.humidity,
+                           description: "\(data.humidity)%")
+    iconView.configure(image: data.icon,
+                       title: data.description)
     
   }
   
@@ -77,7 +81,7 @@ final class WeatherViewController: UIViewController {
   
   private func setDefaultImageView() {
     imageView.image = UIImage(named: "broken clouds")
-    let banner = NotificationBanner(title: "Image", subtitle: "Default image had loaded", style: .info)
+    let banner = NotificationBanner(title: Constants.ErrorImage.title, subtitle: Constants.ErrorImage.subtitle, style: .info)
     banner.show()
   }
   

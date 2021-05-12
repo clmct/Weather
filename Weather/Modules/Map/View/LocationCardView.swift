@@ -84,7 +84,7 @@ final class LocationCardView: UIView {
       make.height.equalTo(44)
     }
     
-    showWeatherButton.setTitle("Show Weather", for: .normal)
+    showWeatherButton.setTitle(Constants.Map.showWeather, for: .normal)
     showWeatherButton.setTitleColor(.basic3, for: .normal)
     showWeatherButton.layer.cornerRadius = 22
     showWeatherButton.layer.borderWidth = 1

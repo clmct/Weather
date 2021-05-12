@@ -1,0 +1,28 @@
+"MAP_CARD_VIEW_BTN" = "Show Weather";
+"MAP_TITLE"= "Global Weather";
+"MAP_BACK_ITEM"= "Map";
+
+"ERROR_NO_INTERNET_TITLE"= "No internet";
+"ERROR_NO_INTERNET_DESCRIPTION"= "Try refreshing the screen when communication is restored.";
+
+"ERROR_SOMETHING_WENT_WRONG_TITLE"= "Something went wrong";
+"ERROR_SOMETHING_WENT_WRONG_DESCRIPTION"= "The problem is on our side, we are already looking into it. Please try refreshing the screen later.";
+
+"ERROR_BUTTON_TITLE"= "Refresh";
+
+"DIRECTION_NORTH" = "N";
+"DIRECTION_EAST" = "E";
+"DIRECTION_SOUTH" = "S";
+"DIRECTION_WEST" = "W";
+
+"PRESSURE" = "PRESSURE";
+"PRESSURE_UNIT_OF_MEASUREMENT" = "mm Hg";
+"WIND" = "WIND";
+"WIND_UNIT_OF_MEASUREMENT" = "m/s";
+"HUMIDITY" = "HUMIDITY";
+
+"ERROR_IMAGE_TITLE" = "Image";
+"ERROR_IMAGE_SUBTITLE" = "Default image had loaded";
+
+"ERROR_ICON_TITLE" = "Icon";
+"ERROR_ICON_SUBTITLE" = "Default image had loaded";

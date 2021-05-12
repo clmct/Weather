@@ -48,12 +48,12 @@ final class NetworkErrorView: UIView {
   private func setupText(networkType: NetworkError) {
     switch networkType {
     case .noInternet:
-      titleLabel.text = Constants.NoInternet.title.rawValue
-      let text = Constants.NoInternet.description.rawValue
+      titleLabel.text = Constants.NoInternet.title
+      let text = Constants.NoInternet.description
       descriptionLabel.attributedText = attributedText(text: text)
     case .serverResponse:
-      titleLabel.text = Constants.SomethingWentWrong.title.rawValue
-      let text = Constants.SomethingWentWrong.description.rawValue
+      titleLabel.text = Constants.SomethingWentWrong.title
+      let text = Constants.SomethingWentWrong.description
       descriptionLabel.attributedText = attributedText(text: text)
     }
   }
@@ -87,7 +87,7 @@ final class NetworkErrorView: UIView {
   }
   
   private func setupRefreshButton() {
-    refreshButton.setTitle("Refresh", for: .normal)
+    refreshButton.setTitle(Constants.ErrorButton.title, for: .normal)
     refreshButton.setTitleColor(.basic3, for: .normal)
     refreshButton.layer.cornerRadius = 22
     refreshButton.layer.borderWidth = 1

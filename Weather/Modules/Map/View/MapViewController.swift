@@ -145,8 +145,8 @@ final class MapViewController: UIViewController {
   
   // MARK: Layout
   private func setupLayout() {
-    title = "Global Weather"
-    navigationItem.backBarButtonItem = UIBarButtonItem(title: "Map", style: .plain, target: self, action: nil)
+    title = Constants.Map.title
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: Constants.Map.backItem, style: .plain, target: self, action: nil)
     setupNavigationItem()
     setupMapView()
     setupLocationCardView()
@@ -202,9 +202,9 @@ final class MapViewController: UIViewController {
   }
   
   private func setupDefaultRegion() {
-    let latitude = CLLocationDegrees(Constants.DefaultLocation.latitude.rawValue)
-    let longitude = CLLocationDegrees(Constants.DefaultLocation.longitude.rawValue)
-    let meters = CLLocationDistance(Constants.DefaultLocation.meters.rawValue)
+    let latitude = CLLocationDegrees(Constants.DefaultLocation.latitude)
+    let longitude = CLLocationDegrees(Constants.DefaultLocation.longitude)
+    let meters = CLLocationDistance(Constants.DefaultLocation.meters)
     let coordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude,
                                                                              longitude: longitude),
                                               latitudinalMeters: meters,

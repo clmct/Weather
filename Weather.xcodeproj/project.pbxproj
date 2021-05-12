@@ -34,6 +34,7 @@
 		B282F323264829C600FA81E5 /* NetworkErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B282F322264829C600FA81E5 /* NetworkErrorViewController.swift */; };
 		B282F32626482A2100FA81E5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B282F32526482A2100FA81E5 /* Constants.swift */; };
 		B282F32B26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B282F32A26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift */; };
+		B2B53771264C19AE00B072D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B53773264C19AE00B072D8 /* Localizable.strings */; };
 		B2B6255C264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B6255B264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift */; };
 		B2B62567264AE98C00CD3BFD /* BinaryFloatingPoint+minutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B62566264AE98C00CD3BFD /* BinaryFloatingPoint+minutes.swift */; };
 		B2B6256A264AE99E00CD3BFD /* BinaryFloatingPoint+seconds.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B62569264AE99E00CD3BFD /* BinaryFloatingPoint+seconds.swift */; };
@@ -79,6 +80,7 @@
 		B282F322264829C600FA81E5 /* NetworkErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorViewController.swift; sourceTree = "<group>"; };
 		B282F32526482A2100FA81E5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B282F32A26482BEC00FA81E5 /* UINavigationController+networkErrorShowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+networkErrorShowing.swift"; sourceTree = "<group>"; };
+		B2B53772264C19AE00B072D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B2B6255B264ACA3700CD3BFD /* WeatherViewController+networkErrorShowingProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherViewController+networkErrorShowingProtocol.swift"; sourceTree = "<group>"; };
 		B2B62566264AE98C00CD3BFD /* BinaryFloatingPoint+minutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+minutes.swift"; sourceTree = "<group>"; };
 		B2B62569264AE99E00CD3BFD /* BinaryFloatingPoint+seconds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+seconds.swift"; sourceTree = "<group>"; };
@@ -242,6 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				B24EFCEA2647C2CB0032B07E /* Token.xcconfig */,
+				B2B53773264C19AE00B072D8 /* Localizable.strings */,
+				B2B53784264C295E00B072D8 /* Constants */,
 				B2B6257E264AEBCC00CD3BFD /* Heplers */,
 				B222971C264944AA0061639E /* Logger */,
 				B2FBC00E2641985D009FE9D4 /* Entities */,
@@ -287,6 +291,14 @@
 			path = NetworkError;
 			sourceTree = "<group>";
 		};
+		B2B53784264C295E00B072D8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				B282F32526482A2100FA81E5 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		B2B6257E264AEBCC00CD3BFD /* Heplers */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,7 +339,6 @@
 				B2FBC00F26419872009FE9D4 /* Weather.swift */,
 				B24339C42645671600607448 /* MainWeather.swift */,
 				B24339C72645672000607448 /* Wind.swift */,
-				B282F32526482A2100FA81E5 /* Constants.swift */,
 				B223F6872649C57600073526 /* WeatherViewModelData.swift */,
 			);
 			path = Entities;
@@ -395,6 +406,7 @@
 			files = (
 				B261AD182638617C0033BE0A /* LaunchScreen.storyboard in Resources */,
 				B261AD152638617C0033BE0A /* Assets.xcassets in Resources */,
+				B2B53771264C19AE00B072D8 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +524,14 @@
 				B261AD172638617C0033BE0A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B2B53773264C19AE00B072D8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2B53772264C19AE00B072D8 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
