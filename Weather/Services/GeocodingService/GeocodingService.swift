@@ -26,10 +26,14 @@ extension GeocodingService: GeocodingServiceProtocol {
     geoCoder.geocodeAddressString(city) { placeMarks, _ in
       guard let placeMark = placeMarks?.first,
             let coordinate = placeMark.location?.coordinate else {
-        completion(.failure(.errorCoordinate))
+        DispatchQueue.main.async {
+          completion(.failure(.errorCoordinate))
+        }
         return
       }
-      completion(.success(coordinate))
+      DispatchQueue.main.async {
+        completion(.success(coordinate))
+      }
     }
   }
   
@@ -38,10 +42,14 @@ extension GeocodingService: GeocodingServiceProtocol {
       guard let self = self else { return }
       guard let placeMark = placeMarks?.first,
             let city = self.getCityName(placeMark: placeMark) else {
-        completion(.failure(.errorName))
+        DispatchQueue.main.async {
+          completion(.failure(.errorName))
+        }
         return
       }
-      completion(.success(city))
+      DispatchQueue.main.async {
+        completion(.success(city))
+      }
     }
   }
 }

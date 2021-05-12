@@ -52,16 +52,14 @@ final class MapViewModel: MapViewModelProtocol {
   func requestShowLocationCard(text: String) {
     didRequestStart?()
     geocodingService.getLocationCoordinate(city: text) { [weak self] result in
-      DispatchQueue.main.async {
-        switch result {
-        case .success(let coordinate):
-          self?.requestShowLocationCard(cityName: text, coordinate: coordinate)
-        case .failure(let error):
-          Logger.geocodingError(messageLog: error.localizedDescription)
-          self?.requestHideLocationCard()
-        }
-        self?.didRequestEnd?()
+      switch result {
+      case .success(let coordinate):
+        self?.requestShowLocationCard(cityName: text, coordinate: coordinate)
+      case .failure(let error):
+        Logger.geocodingError(messageLog: error.localizedDescription)
+        self?.requestHideLocationCard()
       }
+      self?.didRequestEnd?()
     }
   }
   
@@ -69,16 +67,14 @@ final class MapViewModel: MapViewModelProtocol {
     didRequestStart?()
     let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
     geocodingService.getLocationName(location: location) { [weak self] result in
-      DispatchQueue.main.async {
-        switch result {
-        case .success(let cityName):
-          self?.requestShowLocationCard(cityName: cityName, coordinate: coordinate)
-        case .failure(let error):
-          Logger.geocodingError(messageLog: error.localizedDescription)
-          self?.requestHideLocationCard()
-        }
-        self?.didRequestEnd?()
+      switch result {
+      case .success(let cityName):
+        self?.requestShowLocationCard(cityName: cityName, coordinate: coordinate)
+      case .failure(let error):
+        Logger.geocodingError(messageLog: error.localizedDescription)
+        self?.requestHideLocationCard()
       }
+      self?.didRequestEnd?()
     }
   }
   

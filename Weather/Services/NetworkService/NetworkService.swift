@@ -13,7 +13,9 @@ protocol NetworkServiceProtocol {
 final class NetworkService {
   private func fetch<T: Codable>(router: NetworkRouter, completion: @escaping (Result<T, NetworkError>) -> Void) {
     guard let url = router.getURL() else {
-      completion(.failure(.serverResponse))
+      DispatchQueue.main.async {
+        completion(.failure(.serverResponse))
+      }
       Logger.serverError(messageLog: "url error")
       return
     }
@@ -28,19 +30,27 @@ final class NetworkService {
       
       if self.checkData(data: data), self.checkResponse(response: response), self.checkError(error: error) {
       } else {
-        completion(.failure(.serverResponse))
+        DispatchQueue.main.async {
+          completion(.failure(.serverResponse))
+        }
         return
       }
       
       guard let data = data else {
-        completion(.failure(.noInternet))
+        DispatchQueue.main.async {
+          completion(.failure(.noInternet))
+        }
         return
       }
       do {
         let jsonObject = try JSONDecoder().decode(T.self, from: data)
-        completion(.success(jsonObject))
+        DispatchQueue.main.async {
+          completion(.success(jsonObject))
+        }
       } catch {
-        completion(.failure(.serverResponse))
+        DispatchQueue.main.async {
+          completion(.failure(.serverResponse))
+        }
         Logger.serverError(messageLog: "decode isn't success")
       }
     }.resume()

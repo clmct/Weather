@@ -38,25 +38,23 @@ final class WeatherViewModel: WeatherViewModelProtocol {
     didRequestStart?()
     networkService.getWeather(city: city) { [weak self] (result: Result<CityWeather, NetworkError>) in
       guard let self = self else { return }
-      DispatchQueue.main.async {
-        switch result {
-        case .success(let weather):
-          let temperature = TemperatureFormatter(kelvinTemperature: weather.main.temp).convertKelvinToCelsius()
-          let windDegrees = CardinalDirectionFormatter(degrees: weather.wind.deg).convertToCompassDirection()
-          self.data = WeatherViewModelData(pressure: weather.main.pressure,
-                                           humidity: weather.main.humidity,
-                                           temperature: Int(temperature),
-                                           windSpeed: weather.wind.speed,
-                                           windDeg: windDegrees,
-                                           cityName: weather.name,
-                                           description: weather.weather.first?.description,
-                                           icon: weather.weather.first?.icon)
-          self.didRequestUpdateView?()
-        case .failure(let networkError):
-          self.didRequestShowError?(networkError)
-        }
-        self.didRequestEnd?()
+      switch result {
+      case .success(let weather):
+        let temperature = TemperatureFormatter(kelvinTemperature: weather.main.temp).convertKelvinToCelsius()
+        let windDegrees = CardinalDirectionFormatter(degrees: weather.wind.deg).convertToCompassDirection()
+        self.data = WeatherViewModelData(pressure: weather.main.pressure,
+                                         humidity: weather.main.humidity,
+                                         temperature: Int(temperature),
+                                         windSpeed: weather.wind.speed,
+                                         windDeg: windDegrees,
+                                         cityName: weather.name,
+                                         description: weather.weather.first?.description,
+                                         icon: weather.weather.first?.icon)
+        self.didRequestUpdateView?()
+      case .failure(let networkError):
+        self.didRequestShowError?(networkError)
       }
+      self.didRequestEnd?()
     }
   }
 }
