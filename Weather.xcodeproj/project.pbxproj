@@ -248,7 +248,7 @@
 				B24EFCEA2647C2CB0032B07E /* Token.xcconfig */,
 				B2B53773264C19AE00B072D8 /* Localizable.strings */,
 				B2B53784264C295E00B072D8 /* Constants */,
-				B2B6257E264AEBCC00CD3BFD /* Heplers */,
+				B2B6257E264AEBCC00CD3BFD /* Helpers */,
 				B222971C264944AA0061639E /* Logger */,
 				B2FBC00E2641985D009FE9D4 /* Entities */,
 				B2FBBFF6264183C6009FE9D4 /* SupportingFiles */,
@@ -302,13 +302,13 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		B2B6257E264AEBCC00CD3BFD /* Heplers */ = {
+		B2B6257E264AEBCC00CD3BFD /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				B2B62580264AEBDF00CD3BFD /* CardinalDirectionFormatter.swift */,
 				B2B62583264AEBEC00CD3BFD /* TemperatureFormatter.swift */,
 			);
-			path = Heplers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		B2EE88BA263AFE9C00DE694E /* Extensions */ = {
