@@ -40,8 +40,8 @@ final class WeatherViewModel: WeatherViewModelProtocol {
       guard let self = self else { return }
       switch result {
       case .success(let weather):
-        let temperature = TemperatureFormatter(kelvinTemperature: weather.main.temp).convertKelvinToCelsius()
-        let windDegrees = CardinalDirectionFormatter(degrees: weather.wind.deg).convertToCompassDirection()
+        let temperature = TemperatureFormatter.convertKelvinToCelsius(temperature: weather.main.temp)
+        let windDegrees = CardinalDirectionFormatter.convertDegreesToNameOfCardinalDirection(degrees: weather.wind.deg)
         self.data = WeatherViewModelData(pressure: weather.main.pressure,
                                          humidity: weather.main.humidity,
                                          temperature: Int(temperature),

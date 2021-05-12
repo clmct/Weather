@@ -1,9 +1,7 @@
 import Foundation
 
 struct TemperatureFormatter {
-  var kelvinTemperature: Double
-  
-  func convertKelvinToCelsius() -> Double {
-    return kelvinTemperature - 273.15
+  static func convertKelvinToCelsius(temperature: Double) -> Double {
+    return temperature - 273.15
   }
 }

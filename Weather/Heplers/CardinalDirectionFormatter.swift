@@ -1,9 +1,7 @@
 import Foundation
 
 struct CardinalDirectionFormatter {
-  var degrees: Int
-  
-  func convertToCompassDirection() -> String {
+  static func convertDegreesToNameOfCardinalDirection(degrees: Int) -> String {
     switch degrees {
     case 0...90:
       return Constants.CardinalDirection.north
