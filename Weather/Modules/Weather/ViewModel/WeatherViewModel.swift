@@ -7,11 +7,11 @@ protocol WeatherViewModelProtocol {
   var didRequestEnd: (() -> Void)? { get set }
   var didRequestShowError: ((NetworkError) -> Void)? { get set }
   func getWeather()
-  func closeViewController()
+  func viewControllerDidClose()
 }
 
 protocol WeatherViewModelDelegate: class {
-  func didClose()
+  func viewControllerDidClose()
 }
 
 final class WeatherViewModel: WeatherViewModelProtocol {
@@ -30,8 +30,8 @@ final class WeatherViewModel: WeatherViewModelProtocol {
     self.city = city
   }
   
-  func closeViewController() {
-    delegate?.didClose()
+  func viewControllerDidClose() {
+    delegate?.viewControllerDidClose()
   }
   
   func getWeather() {

@@ -22,7 +22,7 @@ final class WeatherViewController: UIViewController {
   }
   
   deinit {
-    viewModel?.closeViewController()
+    viewModel?.viewControllerDidClose()
   }
   
   // MARK: Binding
@@ -39,7 +39,7 @@ final class WeatherViewController: UIViewController {
       }
     }
     
-      viewModel?.didRequestStart = { [weak self] in
+    viewModel?.didRequestStart = { [weak self] in
       guard let self = self else { return }
       self.loader.startAnimating()
     }

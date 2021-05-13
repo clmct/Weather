@@ -30,7 +30,7 @@ final class WeatherCoordinator: CoordinatorProtocol {
 }
 
 extension WeatherCoordinator: WeatherViewModelDelegate {  
-  func didClose() {
+  func viewControllerDidClose() {
     self.delegate?.weatherCoordinatorDidFinishWork()
   }
 }

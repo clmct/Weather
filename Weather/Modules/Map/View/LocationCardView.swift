@@ -27,7 +27,7 @@ final class LocationCardView: UIView {
   
   // MARK: Actions
   @objc
-  private func showWeather() {
+  private func requiredShowWeather() {
     didTapShowWeather?()
   }
   
@@ -90,7 +90,7 @@ final class LocationCardView: UIView {
     showWeatherButton.layer.borderWidth = 1
     showWeatherButton.layer.borderColor = UIColor.basic3.cgColor
     
-    showWeatherButton.addTarget(self, action: #selector(showWeather), for: .touchUpInside)
+    showWeatherButton.addTarget(self, action: #selector(requiredShowWeather), for: .touchUpInside)
   }
   
   private func setupCloseButton() {
