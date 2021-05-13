@@ -174,7 +174,7 @@ final class MapViewController: UIViewController {
     
     locationCardView.didTapShowWeather = { [weak self] in
       guard let self = self else { return }
-      self.viewModel?.requiredShowWeather()
+      self.viewModel?.showWeather()
     }
     
     locationCardView.didTapCloseView = { [weak self] in

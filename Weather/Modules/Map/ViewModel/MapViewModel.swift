@@ -12,7 +12,7 @@ protocol MapViewModelProtocol {
   var didRequestEnd: (() -> Void)? { get set }
   func requestShowLocationCard(coordinate: CLLocationCoordinate2D)
   func requestHideLocationCard()
-  func requiredShowWeather()
+  func showWeather()
   func requestShowLocationCard(text: String)
 }
 
@@ -37,7 +37,7 @@ final class MapViewModel: MapViewModelProtocol {
     self.geocodingService = dependencies.geocodingService
   }
   
-  func requiredShowWeather() {
+  func showWeather() {
     guard let cityName = cityName else { return }
     delegate?.requiredShowWeather(cityName: cityName)
   }
