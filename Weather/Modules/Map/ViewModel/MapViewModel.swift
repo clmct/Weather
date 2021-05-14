@@ -17,7 +17,7 @@ protocol MapViewModelProtocol {
 }
 
 protocol MapViewModelDelegate: class {
-  func requiredShowWeather(cityName: String)
+  func mapViewModel(_ viewModel: MapViewModel, didRequestShowCityWith name: String)
 }
 
 final class MapViewModel: MapViewModelProtocol {
@@ -39,7 +39,7 @@ final class MapViewModel: MapViewModelProtocol {
   
   func showWeather() {
     guard let cityName = cityName else { return }
-    delegate?.requiredShowWeather(cityName: cityName)
+    delegate?.mapViewModel(self, didRequestShowCityWith: cityName)
   }
   
   func requestHideLocationCard() {

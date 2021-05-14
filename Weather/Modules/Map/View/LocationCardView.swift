@@ -5,7 +5,7 @@ final class LocationCardView: UIView {
   private let locationNameLabel = UILabel()
   private let locationCoordinateLabel = UILabel()
   private let showWeatherButton = UIButton(type: .system)
-  private let closeCardViewButton = UIButton(type: .system)
+  private let closeButton = UIButton(type: .system)
   var didTapShowWeather: (() -> Void)?
   var didTapCloseView: (() -> Void)?
   
@@ -94,13 +94,13 @@ final class LocationCardView: UIView {
   }
   
   private func setupCloseButton() {
-    addSubview(closeCardViewButton)
-    closeCardViewButton.snp.makeConstraints { make in
+    addSubview(closeButton)
+    closeButton.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(20)
       make.trailing.equalToSuperview().offset(-20)
     }
     
-    closeCardViewButton.setImage(UIImage(named: "close"), for: .normal)
-    closeCardViewButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
+    closeButton.setImage(UIImage(named: "close"), for: .normal)
+    closeButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
   }
 }

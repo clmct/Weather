@@ -33,9 +33,9 @@ final class WeatherViewController: UIViewController {
       self.updateView(data: data)
       if let description = data.description,
          let image = UIImage( named: description) {
-        self.setImageView(image: image)
+        self.setImage(image)
       } else {
-        self.setDefaultImageView()
+        self.setDefaultImage()
       }
     }
     
@@ -75,11 +75,11 @@ final class WeatherViewController: UIViewController {
                        title: data.description)
   }
   
-  private func setImageView(image: UIImage) {
+  private func setImage(_ image: UIImage) {
     imageView.image = image
   }
   
-  private func setDefaultImageView() {
+  private func setDefaultImage() {
     imageView.image = UIImage(named: "broken clouds")
     let banner = NotificationBanner(title: Constants.ErrorImage.title, subtitle: Constants.ErrorImage.subtitle, style: .info)
     banner.show()

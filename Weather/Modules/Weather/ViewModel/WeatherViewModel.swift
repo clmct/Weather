@@ -11,7 +11,7 @@ protocol WeatherViewModelProtocol {
 }
 
 protocol WeatherViewModelDelegate: class {
-  func viewControllerDidClose()
+  func weatherViewModelDidRequestClose(_ viewModel: WeatherViewModel)
 }
 
 final class WeatherViewModel: WeatherViewModelProtocol {
@@ -31,7 +31,7 @@ final class WeatherViewModel: WeatherViewModelProtocol {
   }
   
   func viewControllerDidClose() {
-    delegate?.viewControllerDidClose()
+    delegate?.weatherViewModelDidRequestClose(self)
   }
   
   func getWeather() {
