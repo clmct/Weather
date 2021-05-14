@@ -17,14 +17,11 @@ extension NetworkErrorShowingProtocol where Self: UINavigationController {
 extension NetworkErrorShowingProtocol where Self: UIViewController {
   func showNetworkError(networkError: NetworkError, completion: @escaping () -> Void) {
     
-    var networkErrorView: NetworkErrorView? = NetworkErrorView(networkType: networkError, frame: view.frame)
-    networkErrorView?.didRefresh = {
+    let networkErrorView = NetworkErrorView(networkType: networkError, frame: view.frame)
+    networkErrorView.didRefresh = { [weak networkErrorView] in
       networkErrorView?.removeFromSuperview()
-      networkErrorView = nil
       completion()
     }
-    if let networkErrorView = networkErrorView {
-      view.addSubview(networkErrorView)
-    }
+    view.addSubview(networkErrorView)
   }
 }
