@@ -84,7 +84,7 @@ final class LocationCardView: UIView {
       make.height.equalTo(44)
     }
     
-    showWeatherButton.setTitle(Constants.Map.showWeather, for: .normal)
+    showWeatherButton.setTitle(R.string.localizable.mapCardViewButton(), for: .normal)
     showWeatherButton.setTitleColor(.basic3, for: .normal)
     showWeatherButton.layer.cornerRadius = 22
     showWeatherButton.layer.borderWidth = 1
@@ -100,7 +100,7 @@ final class LocationCardView: UIView {
       make.trailing.equalToSuperview().offset(-20)
     }
     
-    closeButton.setImage(UIImage(named: "close"), for: .normal)
+    closeButton.setImage(R.image.close(), for: .normal)
     closeButton.addTarget(self, action: #selector(closeView), for: .touchUpInside)
   }
 }

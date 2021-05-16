@@ -23,7 +23,8 @@ final class WeatherIconComponentView: UIView {
     guard let image = image,
           let title = title,
           let url = NetworkRouter.getImage(code: image).getURL() else {
-      let banner = NotificationBanner(title: Constants.ErrorIcon.title, subtitle: Constants.ErrorIcon.subtitle, style: .warning)
+      let banner = NotificationBanner(title: R.string.localizable.errorIconTitle(),
+                                      subtitle: R.string.localizable.errorIconSubtitle(), style: .warning)
       banner.show()
       return
     }

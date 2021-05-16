@@ -4,13 +4,13 @@ struct CardinalDirectionFormatter {
   static func convertDegreesToNameOfCardinalDirection(degrees: Int) -> String {
     switch degrees {
     case 0...90:
-      return Constants.CardinalDirection.north
+      return R.string.localizable.directionNorth()
     case 90...180:
-      return Constants.CardinalDirection.east
+      return R.string.localizable.directionEast()
     case 180...270:
-      return Constants.CardinalDirection.south
+      return R.string.localizable.directionSouth()
     case 270...360:
-      return Constants.CardinalDirection.west
+      return R.string.localizable.directionWest()
     default:
       return ""
     }

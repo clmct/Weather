@@ -32,7 +32,7 @@ final class WeatherViewController: UIViewController {
       guard let data = self.viewModel?.data else { return }
       self.updateView(data: data)
       if let description = data.description,
-         let image = UIImage( named: description) {
+         let image = UIImage(named: description) {
         self.setImage(image)
       } else {
         self.setDefaultImage()
@@ -65,11 +65,11 @@ final class WeatherViewController: UIViewController {
     title = data.cityName
     degreesCelsiusLabel.text = "\(data.temperature)"
     degreesCelsiusSymbolLabel.text = "\u{2103}"
-    pressureView.configure(title: Constants.Weather.pressure,
-                           description: "\(data.pressure) \(Constants.Weather.pressureUnitOfMeasurement)")
-    windView.configure(title: Constants.Weather.wind,
-                       description: "\(data.windDeg) \(data.windSpeed) \(Constants.Weather.windUnitOfMeasurement)")
-    humidityView.configure(title: Constants.Weather.humidity,
+    pressureView.configure(title: R.string.localizable.pressure(),
+                           description: "\(data.pressure) \(R.string.localizable.pressureUnitOfMeasurement())")
+    windView.configure(title: R.string.localizable.wind(),
+                       description: "\(data.windDeg) \(data.windSpeed) \(R.string.localizable.windUnitOfMeasurement())")
+    humidityView.configure(title: R.string.localizable.humidity(),
                            description: "\(data.humidity)%")
     iconView.configure(image: data.icon,
                        title: data.description)
@@ -80,8 +80,10 @@ final class WeatherViewController: UIViewController {
   }
   
   private func setDefaultImage() {
-    imageView.image = UIImage(named: "broken clouds")
-    let banner = NotificationBanner(title: Constants.ErrorImage.title, subtitle: Constants.ErrorImage.subtitle, style: .info)
+    imageView.image = R.image.brokenClouds()
+    let banner = NotificationBanner(title: R.string.localizable.errorImageTitle(),
+                                    subtitle: R.string.localizable.errorImageSubtitle(),
+                                    style: .info)
     banner.show()
   }
   
@@ -177,7 +179,7 @@ final class WeatherViewController: UIViewController {
     }
     imageView.contentMode = .bottomRight
     let mask = CALayer()
-    mask.contents = UIImage(named: "Mask")?.cgImage
+    mask.contents = R.image.mask()?.cgImage
     mask.frame = CGRect(x: 0, y: 0, width: 240, height: 576)
     imageView.layer.mask = mask
     imageView.layer.masksToBounds = true

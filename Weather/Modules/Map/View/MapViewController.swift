@@ -145,8 +145,11 @@ final class MapViewController: UIViewController {
   
   // MARK: Layout
   private func setupLayout() {
-    title = Constants.Map.title
-    navigationItem.backBarButtonItem = UIBarButtonItem(title: Constants.Map.backItem, style: .plain, target: self, action: nil)
+    title = R.string.localizable.mapTitle()
+    navigationItem.backBarButtonItem = UIBarButtonItem(title: R.string.localizable.mapBackItem(),
+                                                       style: .plain,
+                                                       target: self,
+                                                       action: nil)
     setupNavigationItem()
     setupMapView()
     setupLocationCardView()

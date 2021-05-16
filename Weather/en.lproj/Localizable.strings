@@ -1,28 +1,28 @@
-"MAP_CARD_VIEW_BTN" = "Show Weather";
-"MAP_TITLE"= "Global Weather";
-"MAP_BACK_ITEM"= "Map";
+"map.card.view.button" = "Show Weather";
+"map.title"= "Global Weather";
+"map.back.item"= "Map";
 
-"ERROR_NO_INTERNET_TITLE"= "No internet";
-"ERROR_NO_INTERNET_DESCRIPTION"= "Try refreshing the screen when communication is restored.";
+"error.no.internet.title"= "No internet";
+"error.no.internet.description"= "Try refreshing the screen when communication is restored.";
 
-"ERROR_SOMETHING_WENT_WRONG_TITLE"= "Something went wrong";
-"ERROR_SOMETHING_WENT_WRONG_DESCRIPTION"= "The problem is on our side, we are already looking into it. Please try refreshing the screen later.";
+"error.something.went.wrong.title"= "Something went wrong";
+"error.something.went.wrong.description"= "The problem is on our side, we are already looking into it. Please try refreshing the screen later.";
 
-"ERROR_BUTTON_TITLE"= "Refresh";
+"error.button.title"= "Refresh";
 
-"DIRECTION_NORTH" = "N";
-"DIRECTION_EAST" = "E";
-"DIRECTION_SOUTH" = "S";
-"DIRECTION_WEST" = "W";
+"direction.north" = "N";
+"direction.east" = "E";
+"direction.south" = "S";
+"direction.west" = "W";
 
-"PRESSURE" = "PRESSURE";
-"PRESSURE_UNIT_OF_MEASUREMENT" = "mm Hg";
-"WIND" = "WIND";
-"WIND_UNIT_OF_MEASUREMENT" = "m/s";
-"HUMIDITY" = "HUMIDITY";
+"pressure" = "PRESSURE";
+"pressure.unit.of.measurement" = "mm Hg";
+"wind" = "WIND";
+"wind.unit.of.measurement" = "m/s";
+"humidity" = "HUMIDITY";
 
-"ERROR_IMAGE_TITLE" = "Image";
-"ERROR_IMAGE_SUBTITLE" = "Default image had loaded";
+"error.image.title" = "Image";
+"error.image.subtitle" = "Default image had loaded";
 
-"ERROR_ICON_TITLE" = "Icon";
-"ERROR_ICON_SUBTITLE" = "Default image had loaded";
+"error.icon.title" = "Icon";
+"error.icon.subtitle" = "Default image had loaded";
