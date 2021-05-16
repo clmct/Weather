@@ -43,6 +43,7 @@
 		B2B62584264AEBEC00CD3BFD /* TemperatureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B62583264AEBEC00CD3BFD /* TemperatureFormatter.swift */; };
 		B2CC764B26428475006DD3AE /* WeatherComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC764A26428475006DD3AE /* WeatherComponentView.swift */; };
 		B2CC76572642928B006DD3AE /* WeatherIconComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2CC76562642928B006DD3AE /* WeatherIconComponentView.swift */; };
+		B2D33C3F265127330097F539 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D33C3E265127330097F539 /* R.generated.swift */; };
 		B2EE88BD263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift */; };
 		B2EE88C0263AFEE800DE694E /* CLLocation+coordinateDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EE88BF263AFEE800DE694E /* CLLocation+coordinateDescription.swift */; };
 		B2FBBFFB2641890F009FE9D4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FBBFFA2641890F009FE9D4 /* NetworkService.swift */; };
@@ -90,6 +91,7 @@
 		B2B62583264AEBEC00CD3BFD /* TemperatureFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureFormatter.swift; sourceTree = "<group>"; };
 		B2CC764A26428475006DD3AE /* WeatherComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherComponentView.swift; sourceTree = "<group>"; };
 		B2CC76562642928B006DD3AE /* WeatherIconComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconComponentView.swift; sourceTree = "<group>"; };
+		B2D33C3E265127330097F539 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		B2EE88BC263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+degrees.swift"; sourceTree = "<group>"; };
 		B2EE88BF263AFEE800DE694E /* CLLocation+coordinateDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+coordinateDescription.swift"; sourceTree = "<group>"; };
 		B2FBBFFA2641890F009FE9D4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		B261AD0A2638617A0033BE0A /* Weather */ = {
 			isa = PBXGroup;
 			children = (
+				B2D33C3E265127330097F539 /* R.generated.swift */,
 				B24EFCEA2647C2CB0032B07E /* Token.xcconfig */,
 				B2B53773264C19AE00B072D8 /* Localizable.strings */,
 				B2B53784264C295E00B072D8 /* Constants */,
@@ -355,7 +358,8 @@
 			buildConfigurationList = B261AD1C2638617C0033BE0A /* Build configuration list for PBXNativeTarget "Weather" */;
 			buildPhases = (
 				FD28CFCE721D3636A068F8B6 /* [CP] Check Pods Manifest.lock */,
-				B261AD2326386FB70033BE0A /* ShellScript */,
+				B261AD2326386FB70033BE0A /* SwiftLint */,
+				B2D33C3B2651260F0097F539 /* R.swift */,
 				B261AD042638617A0033BE0A /* Sources */,
 				B261AD052638617A0033BE0A /* Frameworks */,
 				B261AD062638617A0033BE0A /* Resources */,
@@ -433,7 +437,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Weather/Pods-Weather-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B261AD2326386FB70033BE0A /* ShellScript */ = {
+		B261AD2326386FB70033BE0A /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -442,6 +446,7 @@
 			);
 			inputPaths = (
 			);
+			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -449,6 +454,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		B2D33C3B2651260F0097F539 /* R.swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			name = R.swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
 		FD28CFCE721D3636A068F8B6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -504,6 +529,7 @@
 				B261AD52263885CE0033BE0A /* LocationCardView.swift in Sources */,
 				B261AD5B263888380033BE0A /* UIFont+customFonts.swift in Sources */,
 				B2B62584264AEBEC00CD3BFD /* TemperatureFormatter.swift in Sources */,
+				B2D33C3F265127330097F539 /* R.generated.swift in Sources */,
 				B2EE88BD263AFEBA00DE694E /* BinaryFloatingPoint+degrees.swift in Sources */,
 				B25647332643EFCA00165943 /* WeatherCoordinator.swift in Sources */,
 				B261AD0C2638617A0033BE0A /* AppDelegate.swift in Sources */,

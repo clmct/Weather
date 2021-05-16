@@ -8,4 +8,6 @@ xcuserdata/
 # CocoaPods
 Pods/
 
+# R.swift generated files
+*.generated.swift
 

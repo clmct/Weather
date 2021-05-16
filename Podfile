@@ -19,5 +19,6 @@ target 'Weather' do
   pod 'SwiftLint'
   pod 'SnapKit'
   pod 'NotificationBannerSwift'
+  pod 'R.swift'
 
 end
