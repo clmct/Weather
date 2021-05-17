@@ -1,7 +1,7 @@
 import UIKit
 
 protocol WeatherCoordinatorDelegate: class {
-  func weatherCoordinatorDidFinishWork()
+  func weatherCoordinatorDidFinishWork(_ coordinator: WeatherCoordinator)
 }
 
 final class WeatherCoordinator: CoordinatorProtocol {
@@ -27,8 +27,9 @@ final class WeatherCoordinator: CoordinatorProtocol {
   }
 }
 
+// MARK: WeatherViewModelDelegate
 extension WeatherCoordinator: WeatherViewModelDelegate {
   func weatherViewModelDidRequestClose(_ viewModel: WeatherViewModel) {
-    self.delegate?.weatherCoordinatorDidFinishWork()
+    self.delegate?.weatherCoordinatorDidFinishWork(self)
   }
 }

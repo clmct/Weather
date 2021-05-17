@@ -30,8 +30,9 @@ extension MapCoordinator: MapViewModelDelegate {
   }
 }
 
+// MARK: WeatherCoordinatorDelegate
 extension MapCoordinator: WeatherCoordinatorDelegate {
-  func weatherCoordinatorDidFinishWork() {
+  func weatherCoordinatorDidFinishWork(_ coordinator: WeatherCoordinator) {
     childCoordinators.removeAll()
-  }  
+  } 
 }
